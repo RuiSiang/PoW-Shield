@@ -25,7 +25,7 @@
     "minimalistic-assert": "^1.0.1",
     "pug": "^3.0.1",
     "randomstring": "^1.1.5",
-    "source-map-loader": "^1.0.1"
+    "source-map-loader": "^2.0.1"
   },
   "devDependencies": {
     "@types/create-hash": "^1.2.2",
