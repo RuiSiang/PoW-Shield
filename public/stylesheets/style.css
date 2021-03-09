@@ -1,0 +1,45 @@
+body {
+  font-family: 'Courier New', Courier, monospace;
+}
+
+a {
+  color: #00b7ff;
+}
+
+/* divs */
+.container {
+  height: 100vh;
+  width: fit-content;
+  text-align: center;
+  justify-content: center;
+  margin: 0 auto;
+  padding-top: 30vh;
+  transition: all 0.5s;
+}
+h1{
+  margin-bottom:0px;
+}
+.rayid{
+  margin-top:0px;
+  font-size:80%;
+}
+.submitting {
+  display:none;
+}
+.success {
+  display:none;
+}
+.failed {
+  display:none;
+}
+.w30{
+  width:30px;
+}
+.blink {
+  animation: blinker 1s linear infinite;
+}
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
