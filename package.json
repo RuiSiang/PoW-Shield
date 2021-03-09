@@ -20,7 +20,7 @@
     "koa-logger": "^3.2.0",
     "koa-router": "^9.4.0",
     "koa-static": "^5.0.0",
-    "koa-views": "^6.2.0",
+    "koa-views": "^7.0.0",
     "koa2-connect": "^1.0.2",
     "minimalistic-assert": "^1.0.1",
     "pug": "^3.0.1",
