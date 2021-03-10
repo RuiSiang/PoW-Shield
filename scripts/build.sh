@@ -1,4 +1,5 @@
 #!bin/bash
+cp config.example.js config.js && \
 tsc && \
 echo "asdf" && \
 cp -rfRT views dist/views && \
