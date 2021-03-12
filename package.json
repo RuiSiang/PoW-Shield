@@ -42,7 +42,7 @@
     "awesome-typescript-loader": "^5.2.1",
     "browserify": "^17.0.0",
     "typescript": "^4.2.3",
-    "uglify-js": "^3.13.0",
+    "uglify-js": "^3.13.1",
     "uglifyify": "^5.0.2"
   }
 }
