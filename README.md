@@ -24,6 +24,7 @@ npm start
 dockerhub (work in progress)
 
 ## Configuration
++ PORT: port that PoW Shield listens to
 + SESSION_KEY: secret key for cookie signatures, use a unique one for security reasons, or anyone can forge your signed cookies
 + WAF: toggles waf functionality on/off (waf is a work in progress)
 + POW: toggles PoW functionality on/off (if not temporary switched off, why use this project at all?)
