@@ -23,9 +23,9 @@ const readTimestamp = async (buffer: Buffer, off: number) => {
   return buffer.readUInt32BE(off) * 0x100000000 + buffer.readUInt32BE(off + 4)
 }
 
-const hash = async (nonce: Buffer, prefix: Buffer | undefined) => {
+const hash = async (nonce: Buffer, prefix: string) => {
   const h = createHash('sha256')
-  if (prefix) h.update(prefix)
+  if (prefix) h.update(prefix,'hex')
   h.update(nonce)
   return h.digest()
 }
