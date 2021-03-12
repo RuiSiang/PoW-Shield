@@ -11,7 +11,7 @@ class Solver {
     let nonce = await utils.allocBuffer(NONCE_SIZE)
     for (;;) {
       await this._genNonce(nonce)
-      const hash = await utils.hash(nonce, Buffer.from(prefix, 'hex'))
+      const hash = await utils.hash(nonce, prefix)
       if (await utils.checkComplexity(hash, complexity)) {
         return nonce
       }
