@@ -1,3 +1,5 @@
+# Compose File
+docker-compose.yaml
 # Logs
 logs
 *.log

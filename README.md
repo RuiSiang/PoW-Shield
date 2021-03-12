@@ -16,12 +16,19 @@ github repo
 ```
 # clone repo first
 npm install
-cp .env.example .env
+cp -n .env.example .env
 # edit .env
 npm run build
 npm start
 ```
-dockerhub (work in progress)
+docker run
+```
+docker run -p 3000:3000 -e BACKEND_URL="http://example.com" -d ruisiang/pow-shield
+```
+docker-compose
+```
+see docker-compose.example.yaml
+```
 
 ## Configuration
 + PORT: port that PoW Shield listens to
@@ -30,17 +37,17 @@ dockerhub (work in progress)
 + POW: toggles PoW functionality on/off (if not temporary switched off, why use this project at all?)
 + NONCE_VALIDITY: specifies the maximum time a nonce has to be submitted to the server after generation(used to enforce difficulty change and filter out stale nonces)
 + INITIAL_DIFFICULTY: initial difficulty, number of leading 0-bits in produced hash (0:extremely easy ~ 256:impossible, 13(default):takes about 5 seconds for the browser to calculate)
-+ BACKEND_URL: location to proxy authenticated traffic to, IP and URLs are both accepted
++ BACKEND_URL: location to proxy authenticated traffic to, IP and URLs are both accepted(accepts protocol://url(:port) or protocol://ip(:port))
 
 ## TODOs
 - [x] Web Service Structure
 - [x] Proxy Functionality
 - [x] PoW Implementation
+- [x] Dockerization
 - [ ] WAF Implementation
 - [ ] IP Blacklisting
 - [ ] Dynamic Difficulty
 - [ ] Unit Testing
-- [ ] Dockerization
 - [ ] Multi-Instance Syncing
 
 ## License
