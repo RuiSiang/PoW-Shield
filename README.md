@@ -9,7 +9,7 @@ Project dedicated to provide DDoS protection with proof-of-work
 ## Description
 PoW Shield provides DDoS protection on OSI application layer by acting as a proxy that utilizes proof of work between the backend service and the end user. This project aims to provide an alternative to general captcha methods such as Google's ReCaptcha that has always been a pain to solve. Accessing a web service protected by PoW Shield has never been easier, simply go to the url, and your browser will do the rest of the work for you.
 
-PoW Shield aims to provide the following services bundles in a single webapp / docker image:
+PoW Shield aims to provide the following services bundled in a single webapp / docker image:
 + proof of work authentication
 + ratelimiting and ip blacklisting
 + web application firewall
@@ -46,7 +46,7 @@ see docker-compose.example.yaml
 
 + RATE_LIMIT: (default:on) toggles ratelimit functionality on/off
 + RATE_LIMIT_SAMPLE_MINUTES: (default:60) specifies how many minutes until statistics reset for session/ip 
-+ RATE_LIMIT_SESSION_THRESHOLD: (default:100) number of requests that a single session can make until triggering token revokation
++ RATE_LIMIT_SESSION_THRESHOLD: (default:100) number of requests that a single session can make until triggering token revocation
 + RATE_LIMIT_BAN_IP: (default:on) toggles ip banning functionality on/off
 + RATE_LIMIT_IP_THRESHOLD: (default:500) number of requests that a single session can make until triggering IP ban
 + RATE_LIMIT_BAN_MINUTES: (default:15) number of minutes that IP ban persists
