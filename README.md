@@ -7,9 +7,14 @@ Project dedicated to provide DDoS protection with proof-of-work
 
 ![screenshot](screenshot.jpg)
 ## Description
-PoW Shield provides DDoS protection on OSI application layer by acting as a proxy between the backend service and the end user. This project aims to provide an alternative to general captcha methods such as Google's ReCaptcha that has always been a pain to solve. Accessing a web service protected by PoW Shield has never been easier, simply go to the url, and your browser will do the rest of the work for you.
+PoW Shield provides DDoS protection on OSI application layer by acting as a proxy that utilizes proof of work between the backend service and the end user. This project aims to provide an alternative to general captcha methods such as Google's ReCaptcha that has always been a pain to solve. Accessing a web service protected by PoW Shield has never been easier, simply go to the url, and your browser will do the rest of the work for you.
 
-[Detailed description and story on Medium](https://ruisiang.medium.com/pow-shield-application-layer-proof-of-work-ddos-filter-4fed32465509 "PoW Shield: Application Layer Proof of Work DDoS Filter") 
+PoW Shield aims to provide the following services bundles in a single webapp / docker image:
++ proof of work authentication
++ ratelimiting and ip blacklisting
++ web application firewall
+
+[Story on Medium](https://ruisiang.medium.com/pow-shield-application-layer-proof-of-work-ddos-filter-4fed32465509 "PoW Shield: Application Layer Proof of Work DDoS Filter") 
 
 ## Usage
 github repo
@@ -31,24 +36,33 @@ see docker-compose.example.yaml
 ```
 
 ## Configuration
-+ PORT: port that PoW Shield listens to
++ PORT: (default:3000) port that PoW Shield listens to
 + SESSION_KEY: secret key for cookie signatures, use a unique one for security reasons, or anyone can forge your signed cookies
-+ WAF: toggles waf functionality on/off (waf is a work in progress)
-+ POW: toggles PoW functionality on/off (if not temporary switched off, why use this project at all?)
-+ NONCE_VALIDITY: specifies the maximum time a nonce has to be submitted to the server after generation(used to enforce difficulty change and filter out stale nonces)
-+ INITIAL_DIFFICULTY: initial difficulty, number of leading 0-bits in produced hash (0:extremely easy ~ 256:impossible, 13(default):takes about 5 seconds for the browser to calculate)
++ WAF: (default:on) toggles waf functionality on/off (waf is a work in progress)
++ POW: (default:on) toggles PoW functionality on/off (if not temporary switched off, why use this project at all?)
++ NONCE_VALIDITY: (default:60000) specifies the maximum seconds a nonce has to be submitted to the server after generation(used to enforce difficulty change and filter out stale nonces)
++ INITIAL_DIFFICULTY: (default:13) initial difficulty, number of leading 0-bits in produced hash (0:extremely easy ~ 256:impossible, 13(default) takes about 5 seconds for the browser to calculate)
 + BACKEND_URL: location to proxy authenticated traffic to, IP and URLs are both accepted(accepts protocol://url(:port) or protocol://ip(:port))
+
++ RATE_LIMIT: (default:on) toggles ratelimit functionality on/off
++ RATE_LIMIT_SAMPLE_MINUTES: (default:60) specifies how many minutes until statistics reset for session/ip 
++ RATE_LIMIT_SESSION_THRESHOLD: (default:100) number of requests that a single session can make until triggering token revokation
++ RATE_LIMIT_BAN_IP: (default:on) toggles ip banning functionality on/off
++ RATE_LIMIT_IP_THRESHOLD: (default:500) number of requests that a single session can make until triggering IP ban
++ RATE_LIMIT_BAN_MINUTES: (default:15) number of minutes that IP ban persists
 
 ## TODOs
 - [x] Web Service Structure
 - [x] Proxy Functionality
 - [x] PoW Implementation
 - [x] Dockerization
+- [x] IP Blacklisting
+- [x] Ratelimiting
 - [ ] WAF Implementation
-- [ ] IP Blacklisting
 - [ ] Dynamic Difficulty
 - [ ] Unit Testing
 - [ ] Multi-Instance Syncing
+- [ ] Monitoring
 
 ## License
 BSD 3-Clause License

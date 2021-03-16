@@ -3,7 +3,7 @@ import utils from './utils'
 
 const MIN_NONCE_LEN = 8
 const MAX_NONCE_LEN = 32
-const DEFAULT_VALIDITY = config.get()['nonce_validity']
+const DEFAULT_VALIDITY = config.nonce_validity
 
 export interface IVerifierOptions {
   readonly validity?: number
