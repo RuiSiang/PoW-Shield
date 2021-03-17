@@ -10,6 +10,7 @@ import session from 'koa-session-minimal'
 
 import config from './service/config-parser'
 import powRouter from './routes/pow-router'
+import testRouter from './routes/test-router'
 import { controller } from './service/controller-service'
 
 app.keys = [config.session_key]
@@ -57,11 +58,13 @@ app.use(async (ctx, next) => {
 })
 
 // service and routes
+if (process.env.NODE_ENV === 'test') {
+  app.use(testRouter.routes())
+}
+app.use(controller)
 if (config.pow) {
   app.use(powRouter.routes())
 }
-app.use(controller)
-
 app.use(c2k(proxy))
 
 // error-handling

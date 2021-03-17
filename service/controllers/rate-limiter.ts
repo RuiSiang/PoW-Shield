@@ -55,6 +55,7 @@ class RateLimiter {
       values: [ip],
     })
   }
+
   private get = async (ip: string) => {
     const dbQuery = await db.queryAsync({
       sql: 'select requests from requests where ip=?',
@@ -68,13 +69,20 @@ class RateLimiter {
   }
   private removeExpired = async () => {
     await db.queryAsync({
-      sql: 'delete from requests where expiry<datetime(CURRENT_TIMESTAMP)',
+      sql: 'delete from requests where expiry<=datetime(CURRENT_TIMESTAMP)',
       values: [],
     })
   }
-  private job = new CronJob('0 */10 * * * *', async () => {
-    await this.removeExpired()
+  private job = new CronJob('0 */5 * * * *', async () => {
+    if (process.env.NODE_ENV !== 'test') {
+      await this.removeExpired()
+    }
   })
+  public triggerRemoveExpired = async () => {
+    if (process.env.NODE_ENV === 'test') {
+      await this.removeExpired()
+    }
+  }
 }
 const rateLimiter = new RateLimiter()
 export default rateLimiter

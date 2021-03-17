@@ -7,13 +7,21 @@ export const controller: Koa.Middleware = async function (
   ctx: Koa.ParameterizedContext,
   next: Koa.Next
 ) {
-  if ((await blacklist.check(ctx.ip, ctx.session)) || !config.rate_limit) {
+  if ((await blacklist.check(ctx.ip)) || !config.rate_limit) {
     if (!!ctx.session.authorized || !config.pow) {
-      Object.assign(ctx.session, await rateLimiter.process(ctx.ip, ctx.session))
+      if (config.rate_limit) {
+        await Object.assign(
+          ctx.session,
+          await rateLimiter.process(ctx.ip, ctx.session)
+        )
+      }
       next()
     } else {
+      console.log(ctx.request.url)
       if (ctx.request.url == '/') {
         ctx.redirect('/pow')
+      } else if (ctx.request.url == '/pow') {
+        await next()
       } else {
         ctx.redirect(`/pow?redirect=${ctx.request.url}`)
       }

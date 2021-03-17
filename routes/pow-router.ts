@@ -11,7 +11,7 @@ router.prefix('/pow')
 
 router.get('/', async (ctx: Koa.ParameterizedContext, next: Koa.Next) => {
   const { difficulty, prefix } = await pow.getProblem()
-  Object.assign(ctx.session, { difficulty, prefix })
+  await Object.assign(ctx.session, { difficulty, prefix })
   await ctx.render('pow', {
     difficulty,
     prefix,
@@ -27,7 +27,7 @@ router.post('/', async (ctx: Koa.ParameterizedContext, next: Koa.Next) => {
     ctx.session.authorized = true
     ctx.status = 200
   } else {
-    Object.assign(ctx.session, {
+    await Object.assign(ctx.session, {
       difficulty: null,
       prefix: null,
     })

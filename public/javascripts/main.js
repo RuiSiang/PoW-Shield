@@ -22,6 +22,8 @@ sendResult = async (nonce, redirect) => {
       method: 'POST',
       body: JSON.stringify(nonce),
     })
+    window.responseStatus=response.status
+    window.nonceSent=true
     if (response.status == 200) {
       document.querySelector('.submitting td.blink').innerHTML = 'V'
       document.querySelector('.submitting td.blink').classList.remove('blink')
