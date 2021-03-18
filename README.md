@@ -58,9 +58,9 @@ see docker-compose.example.yaml
 - [x] Dockerization
 - [x] IP Blacklisting
 - [x] Ratelimiting
+- [x] Unit Testing
 - [ ] WAF Implementation
 - [ ] Dynamic Difficulty
-- [ ] Unit Testing
 - [ ] Multi-Instance Syncing
 - [ ] Monitoring
 

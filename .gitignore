@@ -1,5 +1,9 @@
+# Test Report
+jest-report.html
+
 # Compose File
 docker-compose.yaml
+
 # Logs
 logs
 *.log
