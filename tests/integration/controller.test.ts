@@ -11,13 +11,13 @@ beforeEach(async () => {
 })
 
 describe('Auth status', () => {
-  it('should be issued', async () => {
+  it('should be issuable', async () => {
     await page.waitForFunction('window.nonceSent == true')
     await page.waitForNavigation()
     expect(await page.title()).toEqual('Example Domain')
   }, 20000)
 
-  it('should be revoked', async () => {
+  it('should be revocable', async () => {
     for (let i = 0; i < 3; i++) {
       await page.goto('http://localhost:3000')
     }
@@ -26,7 +26,7 @@ describe('Auth status', () => {
 })
 
 describe('IP banning', () => {
-  it('should be triggered and reset after ban expires', async () => {
+  it('should be triggerable and resets after ban expires', async () => {
     await page.waitForFunction('window.nonceSent == true')
     await page.waitForNavigation()
     expect(await page.title()).toEqual('Example Domain')

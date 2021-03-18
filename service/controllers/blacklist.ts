@@ -24,7 +24,7 @@ class Blacklist {
     }
     return false
   }
-  public ban = async (ip: string, minutes?: number) => {
+  public ban = async (ip: string, minutes: number) => {
     await this.db.queryAsync({
       sql: `insert into blacklist (ip, expiry) values(?, datetime(CURRENT_TIMESTAMP, "+${minutes} minutes"))`,
       values: [ip],
