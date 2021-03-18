@@ -1,10 +1,20 @@
 import moment from 'moment'
 import { CronJob } from 'cron'
-import db from '../database-service'
-import blacklist from './blacklist'
+import Database from '../database-service'
+import Blacklist from './blacklist'
 import config from '../config-parser'
 
 class RateLimiter {
+  private static instance: RateLimiter
+  public static getInstance(): RateLimiter {
+    if (!RateLimiter.instance) {
+      RateLimiter.instance = new RateLimiter()
+    }
+    return RateLimiter.instance
+  }
+
+  private db: Database = Database.getInstance()
+  private blacklist: Blacklist = Blacklist.getInstance()
   constructor() {
     this.job.start()
   }
@@ -38,7 +48,7 @@ class RateLimiter {
     }
     if ((await this.get(ip)) >= config.rate_limit_ip_threshold) {
       if (config.rate_limit_ban_ip) {
-        await blacklist.ban(ip, config.rate_limit_ban_minutes)
+        await this.blacklist.ban(ip, config.rate_limit_ban_minutes)
       }
     }
     session.requests++
@@ -50,14 +60,14 @@ class RateLimiter {
     }
   }
   private add = async (ip: string) => {
-    await db.queryAsync({
+    await this.db.queryAsync({
       sql: `insert into requests (ip, expiry, requests) values(?, datetime(CURRENT_TIMESTAMP, "+${config.rate_limit_sample_minutes} minutes"), 0) on conflict(ip) do update set requests=requests+1`,
       values: [ip],
     })
   }
 
   private get = async (ip: string) => {
-    const dbQuery = await db.queryAsync({
+    const dbQuery = await this.db.queryAsync({
       sql: 'select requests from requests where ip=?',
       values: [ip],
     })
@@ -68,7 +78,7 @@ class RateLimiter {
     }
   }
   private removeExpired = async () => {
-    await db.queryAsync({
+    await this.db.queryAsync({
       sql: 'delete from requests where expiry<=datetime(CURRENT_TIMESTAMP)',
       values: [],
     })
@@ -84,5 +94,5 @@ class RateLimiter {
     }
   }
 }
-const rateLimiter = new RateLimiter()
-export default rateLimiter
+
+export default RateLimiter

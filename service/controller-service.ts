@@ -1,12 +1,14 @@
 import Koa from 'koa'
-import blacklist from './controllers/blacklist'
+import Blacklist from './controllers/blacklist'
 import config from './config-parser'
-import rateLimiter from './controllers/rate-limiter'
+import Ratelimiter from './controllers/rate-limiter'
 
 export const controller: Koa.Middleware = async function (
   ctx: Koa.ParameterizedContext,
   next: Koa.Next
 ) {
+  const blacklist = Blacklist.getInstance()
+  const rateLimiter = Ratelimiter.getInstance()
   if ((await blacklist.check(ctx.ip)) || !config.rate_limit) {
     if (!!ctx.session.authorized || !config.pow) {
       if (config.rate_limit) {

@@ -1,8 +1,17 @@
 import { verbose as sqlite3 } from 'sqlite3'
 
 class Database {
-  private sqliteDb = new (sqlite3().Database)(':memory:')
+  private static instance: Database
+  public static getInstance(): Database {
+    if (!Database.instance) {
+      Database.instance = new Database()
+    }
+    return Database.instance
+  }
+
+  private sqliteDb: any
   constructor() {
+    this.sqliteDb = new (sqlite3().Database)(':memory:')
     this.sqliteDb.run(
       'create table if not exists blacklist (ip text unique, expiry text)'
     )
@@ -34,5 +43,4 @@ class Database {
     return await this.sqliteQuery(data.sql, data.values)
   }
 }
-const database = new Database()
-export default database
+export default Database

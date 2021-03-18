@@ -1,12 +1,21 @@
 import { CronJob } from 'cron'
-import db from '../database-service'
+import Database from '../database-service'
 
 class Blacklist {
+  private static instance: Blacklist
+  public static getInstance(): Blacklist {
+    if (!Blacklist.instance) {
+      Blacklist.instance = new Blacklist()
+    }
+    return Blacklist.instance
+  }
+
+  private db: Database = Database.getInstance()
   constructor() {
     this.job.start()
   }
   public check = async (ip: string) => {
-    const dbQuery = await db.queryAsync({
+    const dbQuery = await this.db.queryAsync({
       sql: 'select * from blacklist where ip=?',
       values: [ip],
     })
@@ -16,13 +25,13 @@ class Blacklist {
     return false
   }
   public ban = async (ip: string, minutes?: number) => {
-    await db.queryAsync({
+    await this.db.queryAsync({
       sql: `insert into blacklist (ip, expiry) values(?, datetime(CURRENT_TIMESTAMP, "+${minutes} minutes"))`,
       values: [ip],
     })
   }
   private removeExpired = async () => {
-    await db.queryAsync({
+    await this.db.queryAsync({
       sql: 'delete from blacklist where expiry<=datetime(CURRENT_TIMESTAMP)',
       values: [],
     })
@@ -39,5 +48,4 @@ class Blacklist {
   }
 }
 
-const blacklist = new Blacklist()
-export default blacklist
+export default Blacklist
