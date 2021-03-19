@@ -52,7 +52,7 @@
     "jest-puppeteer": "^4.4.0",
     "merge": "^2.1.1",
     "puppeteer": "^8.0.0",
-    "ts-jest": "^26.5.3",
+    "ts-jest": "^26.5.4",
     "typescript": "^4.2.3",
     "uglify-js": "^3.13.1",
     "uglifyify": "^5.0.2"
