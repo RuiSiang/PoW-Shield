@@ -1,4 +1,5 @@
 # PoW Shield
+
 [![nodejs-ci](https://github.com/RuiSiang/PoW-Shield/actions/workflows/nodejs-ci.yml/badge.svg)](https://github.com/RuiSiang/PoW-Shield/actions/workflows/nodejs-ci.yml)
 [![njsscan sarif](https://github.com/RuiSiang/PoW-Shield/actions/workflows/njsscan-analysis.yml/badge.svg)](https://github.com/RuiSiang/PoW-Shield/actions/workflows/njsscan-analysis.yml)
 [![CodeQL](https://github.com/RuiSiang/PoW-Shield/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/RuiSiang/PoW-Shield/actions/workflows/codeql-analysis.yml)
@@ -6,52 +7,40 @@
 Project dedicated to provide DDoS protection with proof-of-work
 
 ![screenshot](screenshot.jpg)
+
 ## Description
-PoW Shield provides DDoS protection on OSI application layer by acting as a proxy that utilizes proof of work between the backend service and the end user. This project aims to provide an alternative to general captcha methods such as Google's ReCaptcha that has always been a pain to solve. Accessing a web service protected by PoW Shield has never been easier, simply go to the url, and your browser will do the rest of the work for you.
+
+PoW Shield provides DDoS protection on OSI application layer by acting as a proxy that utilizes proof of work between the backend service and the end user. This project aims to provide an alternative to general captcha methods such as Google's ReCaptcha that has always been a pain to solve. Accessing a web service protected by PoW Shield has never been easier, simply go to the url, and your browser will do the rest of the verification automatically for you.
 
 PoW Shield aims to provide the following services bundled in a single webapp / docker image:
-+ proof of work authentication
-+ ratelimiting and ip blacklisting
-+ web application firewall
 
-[Story on Medium](https://ruisiang.medium.com/pow-shield-application-layer-proof-of-work-ddos-filter-4fed32465509 "PoW Shield: Application Layer Proof of Work DDoS Filter") 
+- proof of work authentication
+- ratelimiting and ip blacklisting
+- web application firewall
 
-## Usage
-github repo
-```
-# clone repo first
-npm install
-cp -n .env.example .env
-# edit .env
-npm run build
-npm start
-```
-docker run
-```
-docker run -p 3000:3000 -e BACKEND_URL="http://example.com" -d ruisiang/pow-shield
-```
-docker-compose
-```
-see docker-compose.example.yaml
-```
+[Story on Medium](https://ruisiang.medium.com/pow-shield-application-layer-proof-of-work-ddos-filter-4fed32465509 'PoW Shield: Application Layer Proof of Work DDoS Filter')
 
-## Configuration
-+ PORT: (default:3000) port that PoW Shield listens to
-+ SESSION_KEY: secret key for cookie signatures, use a unique one for security reasons, or anyone can forge your signed cookies
-+ WAF: (default:on) toggles waf functionality on/off (waf is a work in progress)
-+ POW: (default:on) toggles PoW functionality on/off (if not temporary switched off, why use this project at all?)
-+ NONCE_VALIDITY: (default:60000) specifies the maximum seconds a nonce has to be submitted to the server after generation(used to enforce difficulty change and filter out stale nonces)
-+ INITIAL_DIFFICULTY: (default:13) initial difficulty, number of leading 0-bits in produced hash (0:extremely easy ~ 256:impossible, 13(default) takes about 5 seconds for the browser to calculate)
-+ BACKEND_URL: location to proxy authenticated traffic to, IP and URLs are both accepted(accepts protocol://url(:port) or protocol://ip(:port))
+## How it Works
 
-+ RATE_LIMIT: (default:on) toggles ratelimit functionality on/off
-+ RATE_LIMIT_SAMPLE_MINUTES: (default:60) specifies how many minutes until statistics reset for session/ip 
-+ RATE_LIMIT_SESSION_THRESHOLD: (default:100) number of requests that a single session can make until triggering token revocation
-+ RATE_LIMIT_BAN_IP: (default:on) toggles ip banning functionality on/off
-+ RATE_LIMIT_IP_THRESHOLD: (default:500) number of requests that a single session can make until triggering IP ban
-+ RATE_LIMIT_BAN_MINUTES: (default:15) number of minutes that IP ban persists
+So basically, PoW Shield works as a proxy in front of the actual web app/service. It conducts verification via proof-of-work and only proxies authorized traffic through to the actual server. The proxy is easily installable, and is capable of protecting low security applications with a WAF.
+
+Here’s what happens behind the scenes when a user browses a PoW Shield-protected webservice:
+
+1. The server generates a random hex-encoded “prefix” and sends it along with the PoW Shield page to the client.
+2. Browser JavaScript on the client side then attempts to brute-force a “nonce” that when appended with the prefix, can produce a SHA256 hash with the number of leading zero-bits more than the “difficulty” D specified by the server. i.e. SHA256(prefix + nonce)=0…0xxxx (binary, with more than D leading 0s)
+3. Client-side JavaScript then sends the calculated nonce to the server for verification, if verification passes, the server generates a cookie for the client to pass authentication.
+4. The server starts proxying the now authenticated client traffic to the server with WAF filtering enabled.
+
+## [Usage](USAGE.md)
+
+nodejs and docker
+
+## [Configuration](CONFIGURATION.md)
+
+envitonment variables
 
 ## TODOs
+
 - [x] Web Service Structure
 - [x] Proxy Functionality
 - [x] PoW Implementation
@@ -65,6 +54,7 @@ see docker-compose.example.yaml
 - [ ] Monitoring
 
 ## License
+
 BSD 3-Clause License
 
 Copyright (c) 2021, RuiSiang
