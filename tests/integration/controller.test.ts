@@ -15,7 +15,7 @@ describe('Auth status', () => {
     await page.waitForFunction('window.nonceSent == true')
     await page.waitForNavigation()
     expect(await page.title()).toEqual('Example Domain')
-  }, 20000)
+  }, 10000)
 
   it('should be revocable', async () => {
     for (let i = 0; i < 3; i++) {
@@ -35,9 +35,23 @@ describe('IP banning', () => {
     }
     expect(await page.content()).toContain('banned')
     await page.goto('http://localhost:3000/test?action=triggerRemoveExpired')
-    await page.goto('http://localhost:3000')
+    const response = await page.goto('http://localhost:3000')
+    expect(response.status()).toEqual(200)
     expect(await page.content()).not.toContain('banned')
   }, 20000)
+})
+
+describe('WAF', () => {
+  it('should be triggered on malicious request', async () => {
+    await page.waitForFunction('window.nonceSent == true')
+    await page.waitForNavigation()
+    expect(await page.title()).toEqual('Example Domain')
+    const response = await page.goto(
+      'http://localhost:3000/select column from users'
+    )
+    expect(response.status()).toEqual(403)
+    expect(await page.content()).toContain('WAF rules')
+  }, 10000)
 })
 
 afterEach(async () => {

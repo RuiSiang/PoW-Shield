@@ -1,5 +1,6 @@
 import { CronJob } from 'cron'
-import Database from '../database-service'
+import Database from '../util/database-service'
+import config from '../util/config-parser'
 
 class Blacklist {
   private static instance: Blacklist
@@ -22,7 +23,7 @@ class Blacklist {
     if (!dbQuery.length) {
       return true
     }
-    return false
+    return false || !config.rate_limit
   }
   public ban = async (ip: string, minutes: number) => {
     await this.db.queryAsync({

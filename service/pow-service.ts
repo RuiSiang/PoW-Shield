@@ -1,5 +1,5 @@
 import randomstring from 'randomstring'
-import { Verifier } from '../lib/pow'
+import Verifier from './pow/verifier'
 
 class Pow {
   constructor(initDifficulty: number) {

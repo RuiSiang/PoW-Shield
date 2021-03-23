@@ -1,8 +1,8 @@
 import moment from 'moment'
 import { CronJob } from 'cron'
-import Database from '../database-service'
+import Database from '../util/database-service'
 import Blacklist from './blacklist'
-import config from '../config-parser'
+import config from '../util/config-parser'
 
 class RateLimiter {
   private static instance: RateLimiter

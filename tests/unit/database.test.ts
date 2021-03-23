@@ -1,4 +1,4 @@
-import Database from '../../service/database-service'
+import Database from '../../service/util/database-service'
 
 let db: Database
 const tables = [

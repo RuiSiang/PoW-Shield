@@ -1,4 +1,4 @@
-import config from '../../service/config-parser'
+import config from '../../service/util/config-parser'
 
 describe('Node env', () => {
   it('should be "test"', async () => {
@@ -10,7 +10,6 @@ describe('Configuration', () => {
   it('should match test spec', async () => {
     expect(config).toMatchObject({
       session_key: 'abcdefghijklmnop',
-      waf: true,
       pow: true,
       nonce_validity: 60000,
       initial_difficulty: 13,
@@ -21,6 +20,10 @@ describe('Configuration', () => {
       rate_limit_ban_ip: true,
       rate_limit_ip_threshold: 3,
       rate_limit_ban_minutes: 0,
+      waf: true,
+      waf_url_exclude_rules: '',
+      waf_header_exclude_rules: '14,33,80,96,100',
+      waf_body_exclude_rules: '',
     })
   })
 })

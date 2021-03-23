@@ -8,7 +8,7 @@ import { createProxyMiddleware } from 'http-proxy-middleware'
 import c2k from 'koa2-connect'
 import session from 'koa-session-minimal'
 
-import config from './service/config-parser'
+import config from './service/util/config-parser'
 import powRouter from './routes/pow-router'
 import testRouter from './routes/test-router'
 import { controller } from './service/controller-service'
