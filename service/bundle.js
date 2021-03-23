@@ -1,0 +1,1 @@
+window.powSolver = require('../dist/service/pow/solver.js').Solver;

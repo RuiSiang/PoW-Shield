@@ -2,7 +2,7 @@ import Koa from 'koa'
 import Router from 'koa-router'
 
 import Pow from '../service/pow-service'
-import config from '../service/config-parser'
+import config from '../service/util/config-parser'
 
 const router = new Router()
 const pow = new Pow(config.initial_difficulty)

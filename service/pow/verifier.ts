@@ -1,8 +1,8 @@
-import config from '../../service/config-parser'
+import config from '../util/config-parser'
 import utils from './utils'
 
-const MIN_NONCE_LEN = 8
-const MAX_NONCE_LEN = 32
+const minNonceSize = 8
+const maxNonceSize = 32
 const DEFAULT_VALIDITY = config.nonce_validity
 
 export interface IVerifierOptions {
@@ -21,13 +21,17 @@ export class Verifier {
     complexity: number,
     prefix: string
   ): Promise<boolean> => {
-    if (nonce.length < MIN_NONCE_LEN) return false
-    if (nonce.length > MAX_NONCE_LEN) return false
-    const ts = await utils.readTimestamp(nonce, 0)
-    const now = Date.now()
-    if (Math.abs(ts - now) > this.validity) return false
+    if (nonce.length < minNonceSize || nonce.length > maxNonceSize) {
+      return false
+    }
+    const diff = (await utils.readTimestamp(nonce, 0)) - Date.now()
+    if (Math.abs(diff) > this.validity) {
+      return false
+    }
     const hash = await utils.hash(nonce, prefix)
-    if (!(await utils.checkComplexity(hash, complexity))) return false
+    if (!(await utils.checkComplexity(hash, complexity))) {
+      return false
+    }
     return true
   }
 }

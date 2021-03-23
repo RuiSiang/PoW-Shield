@@ -1,5 +1,5 @@
 import Pow from '../../service/pow-service'
-import { Solver } from '../../lib/pow'
+import { Solver } from '../../service/pow/solver'
 
 let pow: Pow
 let solver: Solver
