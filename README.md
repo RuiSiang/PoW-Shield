@@ -39,6 +39,10 @@ nodejs and docker
 
 envitonment variables
 
+## References
++ Proof-of-work by Fedor Indutny (PoW utility functions)
++ Shadowd by Zesecure (WAF rules)
+
 ## TODOs
 
 - [x] Web Service Structure
@@ -48,7 +52,7 @@ envitonment variables
 - [x] IP Blacklisting
 - [x] Ratelimiting
 - [x] Unit Testing
-- [ ] WAF Implementation
+- [x] WAF Implementation
 - [ ] Dynamic Difficulty
 - [ ] Multi-Instance Syncing
 - [ ] Monitoring

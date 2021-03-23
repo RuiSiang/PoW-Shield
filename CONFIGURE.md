@@ -31,4 +31,7 @@ Ratelimit Options
 
 WAF Options
 
-- WAF: (default:on) toggles waf functionality on/off (waf is still a work in progress)
+- WAF: (default:on) toggles waf functionality on/off
+- WAF_URL_EXCLUDE_RULES: exclude rules to check when scanning request url, use ',' to seperate rule numbers, use '-' to specify a range (eg: 1,2-4,5,7-10)
+- WAF_HEADER_EXCLUDE_RULES: (default:14,33,80,96,100) exclude rules to check when scanning request header, use ',' to seperate rule numbers, use '-' to specify a range (eg: 1,2-4,5,7-10)
+- WAF_BODY_EXCLUDE_RULES: exclude rules to check when scanning request body, use ',' to seperate rule numbers, use '-' to specify a range (eg: 1,2-4,5,7-10)

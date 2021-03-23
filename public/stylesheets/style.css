@@ -11,6 +11,7 @@ a {
   height: 100vh;
   width: fit-content;
   text-align: center;
+  text-align: -moz-center;
   justify-content: center;
   margin: 0 auto;
   padding-top: 30vh;
