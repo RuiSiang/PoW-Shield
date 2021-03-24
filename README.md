@@ -35,9 +35,9 @@ Here’s what happens behind the scenes when a user browses a PoW Shield-protect
 
 nodejs and docker
 
-## [Configuration](CONFIGURATION.md)
+## [Configuration](CONFIGURE.md)
 
-envitonment variables
+environment variables
 
 ## References
 + Proof-of-work by Fedor Indutny (PoW utility functions)
