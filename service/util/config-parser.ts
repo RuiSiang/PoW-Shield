@@ -63,7 +63,7 @@ if (process.env.NODE_ENV === 'test') {
     ),
     waf: (process.env.WAF || 'on') == 'on',
     waf_url_exclude_rules: process.env.WAF_URL_EXCLUDE_RULES || '',
-    waf_header_exclude_rules: process.env.WAF_HEADER_EXCLUDE_RULES || '',
+    waf_header_exclude_rules: process.env.WAF_HEADER_EXCLUDE_RULES || '14,33,80,96,100',
     waf_body_exclude_rules: process.env.WAF_BODY_EXCLUDE_RULES || '',
   }
 }
