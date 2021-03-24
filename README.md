@@ -6,7 +6,7 @@
 
 Project dedicated to provide DDoS protection with proof-of-work
 
-![screenshot](screenshot.jpg)
+![screenshot](https://raw.githubusercontent.com/RuiSiang/PoW-Shield/main/screenshot.jpg)
 
 ## Description
 
@@ -31,11 +31,11 @@ Here’s what happens behind the scenes when a user browses a PoW Shield-protect
 3. Client-side JavaScript then sends the calculated nonce to the server for verification, if verification passes, the server generates a cookie for the client to pass authentication.
 4. The server starts proxying the now authenticated client traffic to the server with WAF filtering enabled.
 
-## [Usage](USAGE.md)
+## [Usage](https://github.com/RuiSiang/PoW-Shield/blob/main/USAGE.md)
 
 nodejs and docker
 
-## [Configuration](CONFIGURE.md)
+## [Configuration](https://github.com/RuiSiang/PoW-Shield/blob/main/CONFIGURE.md)
 
 environment variables
 
