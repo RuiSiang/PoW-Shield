@@ -3,6 +3,9 @@
 [![nodejs-ci](https://github.com/RuiSiang/PoW-Shield/actions/workflows/nodejs-ci.yml/badge.svg)](https://github.com/RuiSiang/PoW-Shield/actions/workflows/nodejs-ci.yml)
 [![njsscan sarif](https://github.com/RuiSiang/PoW-Shield/actions/workflows/njsscan-analysis.yml/badge.svg)](https://github.com/RuiSiang/PoW-Shield/actions/workflows/njsscan-analysis.yml)
 [![CodeQL](https://github.com/RuiSiang/PoW-Shield/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/RuiSiang/PoW-Shield/actions/workflows/codeql-analysis.yml)
+![GitHub repo size](https://img.shields.io/github/repo-size/ruisiang/pow-shield?color=orange)
+[![Docker Image Size (tag)](https://img.shields.io/docker/image-size/ruisiang/pow-shield/latest?label=docker%20image%20size)](https://hub.docker.com/r/ruisiang/pow-shield)
+[![](https://images.microbadger.com/badges/version/ruisiang/pow-shield.svg)](https://hub.docker.com/r/ruisiang/pow-shield)
 
 Project dedicated to provide DDoS protection with proof-of-work
 
@@ -43,19 +46,21 @@ environment variables
 + Proof-of-work by Fedor Indutny (PoW utility functions)
 + Shadowd by Zesecure (WAF rules)
 
-## TODOs
+## Features
+- Web Service Structure
+- Proxy Functionality
+- PoW Implementation
+- Dockerization
+- IP Blacklisting
+- Ratelimiting
+- Unit Testing
+- WAF Implementation
 
-- [x] Web Service Structure
-- [x] Proxy Functionality
-- [x] PoW Implementation
-- [x] Dockerization
-- [x] IP Blacklisting
-- [x] Ratelimiting
-- [x] Unit Testing
-- [x] WAF Implementation
+## Todos
 - [ ] Dynamic Difficulty
 - [ ] Multi-Instance Syncing
 - [ ] Monitoring
+- [ ] Captcha
 
 ## License
 
