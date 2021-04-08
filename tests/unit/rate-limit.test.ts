@@ -36,7 +36,7 @@ describe(`Ratelimiter`, () => {
       timestamp: 'Sun Jan 01 2000 00:00:00 GMT-0000',
       authorized: true,
     })
-    await ratelimiter.triggerRemoveExpired()
+    await ratelimiter.triggerReset()
     expect(result.authorized).toEqual(true)
   })
 })

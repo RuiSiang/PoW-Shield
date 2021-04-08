@@ -30,11 +30,11 @@ describe('IP banning', () => {
     await page.waitForFunction('window.nonceSent == true')
     await page.waitForNavigation()
     expect(await page.title()).toEqual('Example Domain')
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 6; i++) {
       await page.goto('http://localhost:3000')
     }
     expect(await page.content()).toContain('banned')
-    await page.goto('http://localhost:3000/test?action=triggerRemoveExpired')
+    await page.goto('http://localhost:3000/test?action=triggerReset')
     const response = await page.goto('http://localhost:3000')
     expect(response.status()).toEqual(200)
     expect(await page.content()).not.toContain('banned')

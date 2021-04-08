@@ -7,7 +7,7 @@ import logger from 'koa-logger'
 import { createProxyMiddleware } from 'http-proxy-middleware'
 import c2k from 'koa2-connect'
 import session from 'koa-session-minimal'
-
+import redisStore from 'koa-redis'
 import config from './service/util/config-parser'
 import powRouter from './routes/pow-router'
 import testRouter from './routes/test-router'
@@ -24,6 +24,14 @@ app.use(
       signed: true,
       sameSite: 'strict',
     },
+    store:
+      process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'standalone'
+        ? undefined
+        : redisStore({
+            host: config.database_host,
+            port: config.database_port,
+            password: config.database_password,
+          }),
   })
 )
 
@@ -58,7 +66,7 @@ app.use(async (ctx, next) => {
 })
 
 // service and routes
-if (process.env.NODE_ENV === 'test') {
+if (process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'standalone') {
   app.use(testRouter.routes())
 }
 app.use(controller)

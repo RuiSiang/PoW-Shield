@@ -1,66 +1,58 @@
-import { verbose as sqlite3, Database as DatabaseType } from 'sqlite3'
+import config from './config-parser'
+import redis, { Redis } from 'ioredis'
+import redisMock from 'ioredis-mock'
 
 class Database {
   private static instance: Database
-  public static getInstance(): Database {
+  public static getInstance() {
     if (!Database.instance) {
-      Database.instance = new Database()
+      try {
+        Database.instance = new Database()
+      } catch (err) {
+        console.log('Redis error, please check redis server status')
+      }
     }
     return Database.instance
   }
 
-  private sqliteDb: DatabaseType
+  private dbInstance: Redis
   constructor() {
-    this.sqliteDb = new (sqlite3().Database)(':memory:')
-  }
-
-  private tableCheck = false
-  private createIfNotExist = async () => {
-    const table_cmds = [
-      'create table if not exists blacklist (ip text unique, expiry text)',
-      'create table if not exists requests (ip text unique, expiry text, requests int)',
-    ]
-    let promises: Promise<any>[] = []
-    table_cmds.forEach((table_cmd) => {
-      promises.push(
-        new Promise((resolve, reject) => {
-          this.sqliteDb.run(table_cmd, (err) => {
-            if (err) {
-              reject(err)
-            } else {
-              this.tableCheck = true
-              resolve(true)
-            }
-          })
-        })
-      )
-    })
-    return Promise.all(promises)
-  }
-
-  private sqliteQuery = async (
-    query: string,
-    params: string[] | undefined
-  ): Promise<any[]> => {
-    if (!params) {
-      params = []
-    }
-    if (!this.tableCheck) {
-      await this.createIfNotExist()
-    }
-    return new Promise((resolve, reject) => {
-      this.sqliteDb.all(query, params, (err, rows) => {
-        if (err) {
-          reject(err)
-        } else {
-          resolve(rows)
-        }
+    if (
+      process.env.NODE_ENV === 'test' ||
+      process.env.NODE_ENV === 'standalone'
+    ) {
+      this.dbInstance = new redisMock()
+    } else {
+      this.dbInstance = new redis({
+        host: config.database_host,
+        port: config.database_port,
       })
-    })
+    }
   }
-
-  public queryAsync = async (data: { sql: string; values: string[] }) => {
-    return await this.sqliteQuery(data.sql, data.values)
+  public get = async (key: string) => {
+    return await this.dbInstance.get(key)
+  }
+  public set = async (
+    key: string,
+    value: string,
+    setexpr?: boolean,
+    exprTime?: number
+  ) => {
+    if (setexpr) {
+      return await this.dbInstance.set(key, value, 'EX', exprTime, 'NX')
+    } else {
+      return await this.dbInstance.set(key, value, 'NX')
+    }
+  }
+  public incr = async (key: string) => {
+    await this.dbInstance.incr(key)
+  }
+  public del = async (key: string) => {
+    await this.dbInstance.del(key)
+  }
+  public keys = async (pattern: string) => {
+    return await this.dbInstance.keys(pattern)
   }
 }
+
 export default Database

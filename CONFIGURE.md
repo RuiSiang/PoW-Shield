@@ -14,6 +14,11 @@ General Options
 - SESSION_KEY: secret key for cookie signatures, use a unique one for security reasons, or anyone can forge your signed cookies
 - BACKEND_URL: location to proxy authenticated traffic to, IP and URLs are both accepted(accepts protocol://url(:port) or protocol://ip(:port))
 
+Database Options (Redis)
+- DATABASE_HOST: (default:127.0.0.1) redis service host
+- DATABASE_PORT: (default:6379) redis service port
+- DATABASE_PASSWORD: (default:null) redis service password
+
 PoW Options
 
 - POW: (default:on) toggles PoW functionality on/off (if not temporary switched off, why use this project at all?)

@@ -55,10 +55,10 @@ environment variables
 - Ratelimiting
 - Unit Testing
 - WAF Implementation
+- Multi-Instance Syncing (Redis)
 
 ## Todos
 - [ ] Dynamic Difficulty
-- [ ] Multi-Instance Syncing
 - [ ] Monitoring
 - [ ] Captcha
 

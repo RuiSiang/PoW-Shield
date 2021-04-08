@@ -22,11 +22,23 @@ cp -n .env.example .env
 nano .env
 ```
 
-Build and run
+Build
 
 ```
 npm run build
+```
+
+Run with db (redis), recommended & faster
+```
+# install redis first
+# sudo apt-get install redis-server
 npm start
+```
+
+Run without db (mock redis)
+
+```
+npm run start-standalone
 ```
 
 Test functionalities(optional)
@@ -37,10 +49,16 @@ npm test
 
 ## Docker ([repo](https://hub.docker.com/repository/docker/ruisiang/pow-shield))
 
-### docker run
+### docker run with db (redis), recommended & faster
 
 ```
 docker run -p 3000:3000 -e BACKEND_URL="http://example.com" -d ruisiang/pow-shield
+```
+
+### docker run without db (mock redis)
+
+```
+docker run -p 3000:3000 -e BACKEND_URL="http://example.com" -e NODE_ENV="standalone" -d ruisiang/pow-shield
 ```
 
 ### docker-compose

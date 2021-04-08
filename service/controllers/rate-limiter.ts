@@ -1,5 +1,4 @@
 import moment from 'moment'
-import { CronJob } from 'cron'
 import Database from '../util/database-service'
 import Blacklist from './blacklist'
 import config from '../util/config-parser'
@@ -15,9 +14,6 @@ class RateLimiter {
 
   private db: Database = Database.getInstance()
   private blacklist: Blacklist = Blacklist.getInstance()
-  constructor() {
-    this.job.start()
-  }
   public process = async (
     ip: string,
     session: {
@@ -60,37 +56,30 @@ class RateLimiter {
     }
   }
   private add = async (ip: string) => {
-    await this.db.queryAsync({
-      sql: `insert into requests (ip, expiry, requests) values(?, datetime(CURRENT_TIMESTAMP, "+${config.rate_limit_sample_minutes} minutes"), 0) on conflict(ip) do update set requests=requests+1`,
-      values: [ip],
-    })
+    await this.db.set(
+      `req-${ip}`,
+      '0',
+      true,
+      config.rate_limit_sample_minutes * 60
+    )
+    await this.db.incr(`req-${ip}`)
   }
 
   private get = async (ip: string) => {
-    const dbQuery = await this.db.queryAsync({
-      sql: 'select requests from requests where ip=?',
-      values: [ip],
-    })
-    if (!dbQuery.length) {
+    const reqCnt = await this.db.get(`req-${ip}`)
+
+    if (reqCnt === null) {
       return 0
     } else {
-      return dbQuery[0].requests
+      return parseInt(reqCnt)
     }
   }
-  private removeExpired = async () => {
-    await this.db.queryAsync({
-      sql: 'delete from requests where expiry<=datetime(CURRENT_TIMESTAMP)',
-      values: [],
-    })
-  }
-  private job = new CronJob('0 */5 * * * *', async () => {
-    if (process.env.NODE_ENV !== 'test') {
-      await this.removeExpired()
-    }
-  })
-  public triggerRemoveExpired = async () => {
+  public triggerReset = async () => {
     if (process.env.NODE_ENV === 'test') {
-      await this.removeExpired()
+      const reqKeys = await this.db.keys('req-*')
+      for (let i = 0; i < reqKeys.length; i++) {
+        await this.db.del(reqKeys[i])
+      }
     }
   }
 }

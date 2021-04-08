@@ -11,11 +11,11 @@ describe(`Blacklist`, () => {
     expect(await blacklist.check('test_ip')).toBeTruthy()
   })
   it('should not pass ban list checking after banned', async () => {
-    await blacklist.ban('test_ip', 0)
+    await blacklist.ban('test_ip', 10)
     expect(await blacklist.check('test_ip')).toBeFalsy()
   })
   it('should pass ban list checking after ban expired', async () => {
-    await blacklist.triggerRemoveExpired()
+    await blacklist.triggerReset()
     expect(await blacklist.check('test_ip')).toBeTruthy()
   })
 })

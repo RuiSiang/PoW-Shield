@@ -8,6 +8,9 @@ interface Config {
   nonce_validity: number
   initial_difficulty: number
   backend_url: string
+  database_host?: string
+  database_port?: number
+  database_password?: string
   rate_limit: boolean
   rate_limit_sample_minutes: number
   rate_limit_session_threshold: number
@@ -27,14 +30,14 @@ if (process.env.NODE_ENV === 'test') {
     session_key: 'abcdefghijklmnop',
     pow: true,
     nonce_validity: 60000,
-    initial_difficulty: 13,
+    initial_difficulty: 5,
     backend_url: 'http://example.org',
     rate_limit: true,
-    rate_limit_sample_minutes: 0,
+    rate_limit_sample_minutes: 10,
     rate_limit_session_threshold: 2,
     rate_limit_ban_ip: true,
     rate_limit_ip_threshold: 3,
-    rate_limit_ban_minutes: 0,
+    rate_limit_ban_minutes: 10,
     waf: true,
     waf_url_exclude_rules: '',
     waf_header_exclude_rules: '14,33,80,96,100',
@@ -47,6 +50,11 @@ if (process.env.NODE_ENV === 'test') {
     nonce_validity: parseInt(process.env.NONCE_VALIDITY || '') || 60 * 1000,
     initial_difficulty: parseInt(process.env.INITIAL_DIFFICULTY || '') || 13,
     backend_url: process.env.BACKEND_URL || 'http://www.example.com',
+    database_host: process.env.DATABASE_HOST || '127.0.0.1',
+    database_port: process.env.DATABASE_PORT
+      ? parseInt(process.env.DATABASE_PORT)
+      : 6379,
+    database_password: process.env.DATABASE_PASSWORD || '',
     rate_limit: (process.env.RATE_LIMIT || 'on') == 'on',
     rate_limit_sample_minutes: parseInt(
       process.env.RATE_LIMIT_SAMPLE_MINUTES || '60'
@@ -63,7 +71,8 @@ if (process.env.NODE_ENV === 'test') {
     ),
     waf: (process.env.WAF || 'on') == 'on',
     waf_url_exclude_rules: process.env.WAF_URL_EXCLUDE_RULES || '',
-    waf_header_exclude_rules: process.env.WAF_HEADER_EXCLUDE_RULES || '14,33,80,96,100',
+    waf_header_exclude_rules:
+      process.env.WAF_HEADER_EXCLUDE_RULES || '14,33,80,96,100',
     waf_body_exclude_rules: process.env.WAF_BODY_EXCLUDE_RULES || '',
   }
 }
