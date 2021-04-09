@@ -7,11 +7,11 @@ const router = new Router()
 router.prefix('/test')
 
 router.get('/', async (ctx: Koa.ParameterizedContext, next: Koa.Next) => {
-  if (ctx.query.action == 'triggerRemoveExpired') {
+  if (ctx.query.action == 'triggerReset') {
     const rateLimiter = RateLimiter.getInstance()
     const blacklist = Blacklist.getInstance()
-    await rateLimiter.triggerRemoveExpired()
-    await blacklist.triggerRemoveExpired()
+    await rateLimiter.triggerReset()
+    await blacklist.triggerReset()
   }
 })
 

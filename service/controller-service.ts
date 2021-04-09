@@ -22,28 +22,34 @@ export const controller: Koa.Middleware = async function (
           )
         }
         next()
+        return
       } else {
         if (ctx.request.url == '/') {
           ctx.redirect('/pow')
+          return
         } else if (ctx.request.url == '/pow') {
           await next()
+          return
         } else {
           ctx.redirect(`/pow?redirect=${ctx.request.url}`)
+          return
         }
       }
     } else {
       console.log(
         `Rule ${scanResult.id}: "${scanResult.cmt}" in category "${
           scanResult.type
-        }" has been triggered by request ${scanResult.location} at ${new Date().toISOString()}`
+        }" has been triggered by request ${
+          scanResult.location
+        } at ${new Date().toISOString()}`
       )
       ctx.status = 403
       await ctx.render('waf')
+      return
     }
-  } else {
-    ctx.status = 403
-    await ctx.render('banned')
   }
+  ctx.status = 403
+  await ctx.render('banned')
 }
 
 const inspect = async (ctx: Koa.ParameterizedContext) => {

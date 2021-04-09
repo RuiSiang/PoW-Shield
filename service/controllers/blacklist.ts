@@ -12,39 +12,22 @@ class Blacklist {
   }
 
   private db: Database = Database.getInstance()
-  constructor() {
-    this.job.start()
-  }
   public check = async (ip: string) => {
-    const dbQuery = await this.db.queryAsync({
-      sql: 'select * from blacklist where ip=?',
-      values: [ip],
-    })
-    if (!dbQuery.length) {
+    const blk = await this.db.get(`blk-${ip}`)
+    if (blk!='1') {
       return true
     }
     return false || !config.rate_limit
   }
   public ban = async (ip: string, minutes: number) => {
-    await this.db.queryAsync({
-      sql: `insert into blacklist (ip, expiry) values(?, datetime(CURRENT_TIMESTAMP, "+${minutes} minutes"))`,
-      values: [ip],
-    })
+    await this.db.set(`blk-${ip}`, '1', true, minutes * 60)
   }
-  private removeExpired = async () => {
-    await this.db.queryAsync({
-      sql: 'delete from blacklist where expiry<=datetime(CURRENT_TIMESTAMP)',
-      values: [],
-    })
-  }
-  private job = new CronJob('0 */5 * * * *', async () => {
-    if (process.env.NODE_ENV !== 'test') {
-      await this.removeExpired()
-    }
-  })
-  public triggerRemoveExpired = async () => {
+  public triggerReset = async () => {
     if (process.env.NODE_ENV === 'test') {
-      await this.removeExpired()
+      const blkKeys = await this.db.keys('blk-*')
+      for (let i = 0; i < blkKeys.length; i++) {
+        await this.db.del(blkKeys[i])
+      }
     }
   }
 }

@@ -10,6 +10,9 @@ services:
       - NONCE_VALIDITY=60000
       - INITIAL_DIFFICULTY=13
       - BACKEND_URL="http://example.com"
+      - DATABASE_HOST=redis
+      - DATABASE_PORT=6379
+      - DATABASE_PASSWORD=
       - RATE_LIMIT=on
       - RATE_LIMIT_SAMPLE_MINUTES=60
       - RATE_LIMIT_SESSION_THRESHOLD=100
@@ -24,3 +27,5 @@ services:
       - '3000'
     ports:
       - '3000:3000'
+  redis:
+    image: redis:alpine
