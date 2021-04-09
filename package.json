@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node dist/bin/server.js",
-    "start-standalone": "set NODE_ENV=standalone&& node dist/bin/server.js",
+    "start:standalone": "NODE_ENV=standalone node dist/bin/server.js",
+    "start:standalone-win": "set NODE_ENV=standalone&& node dist/bin/server.js",
     "test": "jest --runInBand --forceExit --detectOpenHandles",
     "build": "bash scripts/build.sh",
     "update-static": "bash scripts/update-static.sh"
