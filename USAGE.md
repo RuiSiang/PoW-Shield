@@ -38,7 +38,8 @@ npm start
 Run without db (mock redis)
 
 ```
-npm run start-standalone
+npm run start:standalone # linux
+npm run start:standalone-win # windows
 ```
 
 Test functionalities(optional)
