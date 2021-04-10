@@ -16,7 +16,7 @@
     "debug": "^4.1.1",
     "dotenv": "^8.2.0",
     "http-proxy-middleware": "^1.1.0",
-    "ioredis": "^4.25.0",
+    "ioredis": "^4.26.0",
     "ioredis-mock": "^5.4.1",
     "koa": "^2.7.0",
     "koa-bodyparser": "^4.2.1",
