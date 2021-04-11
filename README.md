@@ -42,10 +42,6 @@ nodejs and docker
 
 environment variables
 
-## References
-+ Proof-of-work by Fedor Indutny (PoW utility functions)
-+ Shadowd by Zesecure (WAF rules)
-
 ## Features
 - Web Service Structure
 - Proxy Functionality
@@ -56,6 +52,10 @@ environment variables
 - Unit Testing
 - WAF Implementation
 - Multi-Instance Syncing (Redis)
+
+## References
++ Proof-of-work by Fedor Indutny (PoW utility functions)
++ Shadowd by Zesecure (WAF rules)
 
 ## License
 
