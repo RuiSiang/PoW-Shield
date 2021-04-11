@@ -57,11 +57,6 @@ environment variables
 - WAF Implementation
 - Multi-Instance Syncing (Redis)
 
-## Todos
-- [ ] Dynamic Difficulty
-- [ ] Monitoring
-- [ ] Captcha
-
 ## License
 
 BSD 3-Clause License
