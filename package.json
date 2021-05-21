@@ -31,7 +31,7 @@
     "moment": "2.29.1",
     "pug": "3.0.2",
     "randomstring": "1.2.1",
-    "source-map-loader": "2.0.2"
+    "source-map-loader": "3.0.0"
   },
   "devDependencies": {
     "@types/create-hash": "1.2.2",
