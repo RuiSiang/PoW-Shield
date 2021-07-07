@@ -46,7 +46,7 @@
     "@types/koa-router": "7.4.3",
     "@types/koa-session-minimal": "3.0.5",
     "@types/koa-views": "2.0.4",
-    "@types/randomstring": "1.1.6",
+    "@types/randomstring": "1.1.7",
     "awesome-typescript-loader": "5.2.1",
     "browserify": "17.0.0",
     "jest": "27.0.6",
