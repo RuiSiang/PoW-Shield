@@ -54,7 +54,7 @@
     "jest-puppeteer": "5.0.4",
     "merge": "2.1.1",
     "puppeteer": "10.1.0",
-    "ts-jest": "27.0.3",
+    "ts-jest": "27.0.4",
     "typescript": "4.3.5",
     "uglify-js": "3.13.10",
     "uglifyify": "5.0.2"
