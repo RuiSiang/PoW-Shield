@@ -18,7 +18,7 @@
     "http-proxy-middleware": "2.0.1",
     "ioredis": "4.27.9",
     "ioredis-mock": "5.6.0",
-    "koa": "2.13.2",
+    "koa": "2.13.3",
     "koa-bodyparser": "4.3.0",
     "koa-json": "2.0.2",
     "koa-logger": "3.2.1",
