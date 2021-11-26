@@ -2,6 +2,10 @@
 
 ## Nodejs
 
+Prerequisites
++ Docker ^19.0.0
++ Nodejs ^14.0.0
+
 Clone repository
 
 ```
