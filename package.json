@@ -48,7 +48,7 @@
     "@types/koa-views": "2.0.4",
     "@types/randomstring": "1.1.8",
     "browserify": "17.0.0",
-    "jest": "27.3.1",
+    "jest": "27.4.0",
     "jest-html-reporters": "2.1.6",
     "jest-puppeteer": "6.0.2",
     "merge": "2.1.1",
