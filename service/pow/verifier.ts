@@ -16,20 +16,20 @@ export class Verifier {
 
   private validity: number
 
-  public check = async (
+  public check = (
     nonce: Buffer,
     complexity: number,
     prefix: string
-  ): Promise<boolean> => {
+  ): boolean => {
     if (nonce.length < minNonceSize || nonce.length > maxNonceSize) {
       return false
     }
-    const diff = (await utils.readTimestamp(nonce, 0)) - Date.now()
+    const diff = (utils.readTimestamp(nonce, 0)) - Date.now()
     if (Math.abs(diff) > this.validity) {
       return false
     }
-    const hash = await utils.hash(nonce, prefix)
-    if (!(await utils.checkComplexity(hash, complexity))) {
+    const hash = utils.hash(nonce, prefix)
+    if (!(utils.checkComplexity(hash, complexity))) {
       return false
     }
     return true

@@ -6,7 +6,7 @@ import Blacklist from '../service/controllers/blacklist'
 const router = new Router()
 router.prefix('/test')
 
-router.get('/', async (ctx: Koa.ParameterizedContext, next: Koa.Next) => {
+router.get('/', async (ctx: Koa.ParameterizedContext, ) => {
   if (ctx.query.action == 'triggerReset') {
     const rateLimiter = RateLimiter.getInstance()
     const blacklist = Blacklist.getInstance()

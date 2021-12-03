@@ -1,13 +1,13 @@
 import config from '../../service/util/config-parser'
 
 describe('Node env', () => {
-  it('should be "test"', async () => {
+  it('should be "test"', () => {
     expect(process.env.NODE_ENV).toStrictEqual('test')
   })
 })
 
 describe('Configuration', () => {
-  it('should match test spec', async () => {
+  it('should match test spec', () => {
     expect(config).toMatchObject({
       session_key: 'abcdefghijklmnop',
       pow: true,

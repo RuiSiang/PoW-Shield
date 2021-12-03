@@ -38,7 +38,7 @@ Here’s what happens behind the scenes when a user browses a PoW Shield-protect
 
 ## [Usage](https://github.com/RuiSiang/PoW-Shield/blob/main/USAGE.md)
 
-nodejs and docker
+nodejs > 16 and docker > 20
 
 ## [Configuration](https://github.com/RuiSiang/PoW-Shield/blob/main/CONFIGURE.md)
 
