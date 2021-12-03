@@ -24,14 +24,14 @@ sendResult = async (nonce, redirect) => {
     })
     window.responseStatus=response.status
     window.nonceSent=true
-    if (response.status == 200) {
+    if (response.status === 200) {
       document.querySelector('.submitting td.blink').innerHTML = 'V'
       document.querySelector('.submitting td.blink').classList.remove('blink')
       setInterval(() => {
         document.querySelector('.success').style.display = 'table-row'
       }, 500)
       setInterval(() => {
-        if (!!redirect) {
+        if (redirect) {
           window.location.href = `${redirect}`
         } else {
           window.location.href = '/'

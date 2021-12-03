@@ -11,8 +11,8 @@ beforeAll(() => {
 
 describe(`PoW service`, () => {
   let powData: any
-  it('should be able to generate problems', async () => {
-    powData = await pow.getProblem()
+  it('should be able to generate problems', () => {
+    powData = pow.getProblem()
     expect(powData.difficulty).toEqual(3)
     expect(powData.prefix).toMatch(/[0-9a-f]{16}/)
   })

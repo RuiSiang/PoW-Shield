@@ -15,7 +15,7 @@ describe('PoW page', () => {
     expect(await page.title()).toEqual('PoW Shield')
   })
 
-  it('should redirect to "/pow"', async () => {
+  it('should redirect to "/pow"', () => {
     expect(page.url()).toEqual('http://localhost:3000/pow')
   })
 

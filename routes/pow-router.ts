@@ -9,8 +9,8 @@ const pow = new Pow(config.initial_difficulty)
 
 router.prefix('/pow')
 
-router.get('/', async (ctx: Koa.ParameterizedContext, next: Koa.Next) => {
-  const { difficulty, prefix } = await pow.getProblem()
+router.get('/', async (ctx: Koa.ParameterizedContext) => {
+  const { difficulty, prefix } = pow.getProblem()
   await Object.assign(ctx.session, { difficulty, prefix })
   await ctx.render('pow', {
     difficulty,
@@ -19,7 +19,7 @@ router.get('/', async (ctx: Koa.ParameterizedContext, next: Koa.Next) => {
   })
 })
 
-router.post('/', async (ctx: Koa.ParameterizedContext, next: Koa.Next) => {
+router.post('/', async (ctx: Koa.ParameterizedContext) => {
   if (!ctx.session) {
     return
   }

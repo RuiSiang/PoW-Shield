@@ -14,10 +14,10 @@ class Pow {
       return false
     }
     const nonce = Buffer.from((await JSON.parse(requestBody)).data)
-    return await this.verify(nonce, session.difficulty, session.prefix)
+    return this.verify(nonce, session.difficulty, session.prefix)
   }
 
-  public getProblem = async () => {
+  public getProblem = (): { difficulty: number; prefix: string } => {
     return {
       difficulty: this.difficulty,
       prefix: randomstring.generate({ length: 16, charset: 'hex' }),
@@ -26,12 +26,12 @@ class Pow {
 
   private difficulty: number
 
-  private verify = async (
+  private verify = (
     nonce: Buffer,
     difficulty: number,
     prefix: string
-  ) => {
-    return await this.verifier.check(nonce, difficulty, prefix)
+  ): boolean => {
+    return this.verifier.check(nonce, difficulty, prefix)
   }
   private verifier = new Verifier({
     validity: 60 * 1000,

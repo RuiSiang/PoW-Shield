@@ -1,4 +1,3 @@
-import { CronJob } from 'cron'
 import Database from '../util/database-service'
 import config from '../util/config-parser'
 

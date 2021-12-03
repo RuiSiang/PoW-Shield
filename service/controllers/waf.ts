@@ -80,7 +80,7 @@ class Waf {
     return numArr
   }
 
-  private detect = async (test: string, excludes: number[]) => {
+  private detect = (test: string, excludes: number[]) => {
     for (let key in this.entries) {
       if (!excludes.includes(parseInt(key))) {
         if (this.entries[key].test(test) === true) {
@@ -91,10 +91,10 @@ class Waf {
     return 0
   }
 
-  public scan = async (ctx: ParameterizedContext) => {
-    if (!!config.waf) {
+  public scan = (ctx: ParameterizedContext) => {
+    if (config.waf) {
       const urlExcludeRules = this.parseNumString(config.waf_url_exclude_rules)
-      const urlResult = await this.detect(ctx.url, urlExcludeRules)
+      const urlResult = this.detect(ctx.url, urlExcludeRules)
       if (!!urlResult) {
         return {
           id: urlResult,
@@ -106,11 +106,11 @@ class Waf {
       const headerExcludeRules = this.parseNumString(
         config.waf_header_exclude_rules
       )
-      const headerResult = await this.detect(
+      const headerResult = this.detect(
         JSON.stringify(ctx.headers),
         headerExcludeRules
       )
-      if (!!headerResult) {
+      if (headerResult) {
         return {
           id: headerResult,
           type: this.types[this.rules[headerResult].type],
@@ -121,7 +121,7 @@ class Waf {
       const bodyExcludeRules = this.parseNumString(
         config.waf_body_exclude_rules
       )
-      const bodyResult = await this.detect(
+      const bodyResult = this.detect(
         JSON.stringify(ctx.request.body),
         bodyExcludeRules
       )
@@ -136,9 +136,9 @@ class Waf {
     }
     return null
   }
-  public test = async (test: string, excludes: number[]) => {
+  public test = (test: string, excludes: number[]): string|0 => {
     if (process.env.NODE_ENV === 'test') {
-      return await this.detect(test, excludes)
+      return this.detect(test, excludes)
     }
     return 0
   }
