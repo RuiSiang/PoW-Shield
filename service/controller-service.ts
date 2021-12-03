@@ -36,6 +36,7 @@ export const controller: Koa.Middleware = async function (
         }
       }
     } else {
+      // skipcq: JS-0002
       console.log(
         `Rule ${scanResult.id}: "${scanResult.cmt}" in category "${
           scanResult.type

@@ -57,14 +57,6 @@ app.use(
   })
 )
 
-// logger
-app.use(async (ctx, next) => {
-  const start: any = new Date()
-  await next()
-  const ms = <any>new Date() - start
-  console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
-})
-
 // service and routes
 if (process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'standalone') {
   app.use(testRouter.routes())
@@ -77,6 +69,7 @@ app.use(c2k(proxy))
 
 // error-handling
 app.on('error', (err, ctx) => {
+  // skipcq: JS-0002
   console.error('server error', err, ctx)
 })
 

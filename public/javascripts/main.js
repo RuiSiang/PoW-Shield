@@ -48,6 +48,5 @@ sendResult = async (nonce, redirect) => {
       }, 3000)
     }
   } catch (err) {
-    console.log(err)
   }
 }

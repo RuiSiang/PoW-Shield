@@ -9,6 +9,7 @@ class Database {
       try {
         Database.instance = new Database()
       } catch (err) {
+        // skipcq: JS-0002
         console.log('Redis error, please check redis server status')
       }
     }
