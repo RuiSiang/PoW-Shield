@@ -5,7 +5,9 @@
 [![CodeQL](https://github.com/RuiSiang/PoW-Shield/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/RuiSiang/PoW-Shield/actions/workflows/codeql-analysis.yml)
 ![GitHub repo size](https://img.shields.io/github/repo-size/ruisiang/pow-shield?color=orange)
 [![Docker Image Size (tag)](https://img.shields.io/docker/image-size/ruisiang/pow-shield/latest?label=docker%20image%20size)](https://hub.docker.com/r/ruisiang/pow-shield)
-[![](https://images.microbadger.com/badges/version/ruisiang/pow-shield.svg)](https://hub.docker.com/r/ruisiang/pow-shield)[![DeepSource](https://deepsource.io/gh/RuiSiang/PoW-Shield.svg/?label=active+issues&show_trend=true&token=yoFuBlRVaXTzIVkgAB6aSUf3)](https://deepsource.io/gh/RuiSiang/PoW-Shield/?ref=repository-badge)
+[![](https://images.microbadger.com/badges/version/ruisiang/pow-shield.svg)](https://hub.docker.com/r/ruisiang/pow-shield)
+[![DeepSource](https://deepsource.io/gh/RuiSiang/PoW-Shield.svg/?label=active+issues&show_trend=true&token=yoFuBlRVaXTzIVkgAB6aSUf3)](https://deepsource.io/gh/RuiSiang/PoW-Shield/?ref=repository-badge)
+[![DeepSource](https://deepsource.io/gh/RuiSiang/PoW-Shield.svg/?label=resolved+issues&show_trend=true&token=yoFuBlRVaXTzIVkgAB6aSUf3)](https://deepsource.io/gh/RuiSiang/PoW-Shield/?ref=repository-badge)
 
 Project dedicated to provide DDoS protection with proof-of-work
 
