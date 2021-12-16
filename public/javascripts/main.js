@@ -7,7 +7,7 @@ window.init = async (difficulty, prefix, redirect) => {
   }, 1500)
 }
 
-runSolver = async (difficulty, prefix) => {
+const runSolver = async (difficulty, prefix) => {
   const solver = new powSolver()
   const nonce = await solver.solve(difficulty, prefix)
   document.querySelector('.calculating td.blink').innerHTML = 'V'
@@ -16,7 +16,7 @@ runSolver = async (difficulty, prefix) => {
   return nonce
 }
 
-sendResult = async (nonce, redirect) => {
+const sendResult = async (nonce, redirect) => {
   try {
     const response = await fetch('/pow', {
       method: 'POST',
