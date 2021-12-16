@@ -49,6 +49,7 @@ app.use(
 )
 app.use(json())
 app.use(logger())
+// skipcq: JS-0359
 app.use(require('koa-static')(`${<string>__dirname}/public`))
 
 app.use(
