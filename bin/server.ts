@@ -6,10 +6,6 @@ const debug = Debug('demo:server')
 const port: number = parseInt(process.env.PORT || '3000')
 const server: http.Server = http.createServer(app.callback())
 
-server.listen(port)
-server.on('error', onError)
-server.on('listening', onListening)
-
 function onError(error: any) { // skipcq: JS-0323
   if (error.syscall !== 'listen') {
     throw error
@@ -37,7 +33,11 @@ function onListening() {
     const bind =
       typeof addr === 'string'
         ? `pipe ${addr as string}`
-        : `port ${<string>addr.port}`
+        : `port ${addr.port.toString() as string}`
     debug('Listening on ' + bind)
   }
 }
+
+server.listen(port)
+server.on('error', onError)
+server.on('listening', onListening)
