@@ -32,7 +32,7 @@ function onListening() {
   if (addr) {
     const bind =
       typeof addr === 'string'
-        ? `pipe ${addr as string}`
+        ? `pipe ${addr}`
         : `port ${addr.port.toString() as string}`
     debug('Listening on ' + bind)
   }
