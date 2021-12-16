@@ -1,14 +1,5 @@
-window.init = async (difficulty, prefix, redirect) => {
-  setTimeout(async () => {
-    const nonce = await runSolver(difficulty, prefix)
-    setTimeout(async () => {
-      await sendResult(nonce, redirect)
-    }, 500)
-  }, 1500)
-}
-
-runSolver = async (difficulty, prefix) => {
-  const solver = new powSolver()
+const runSolver = async (difficulty, prefix) => {
+  const solver = new powSolver() // skipcq: JS-0125
   const nonce = await solver.solve(difficulty, prefix)
   document.querySelector('.calculating td.blink').innerHTML = 'V'
   document.querySelector('.calculating td.blink').classList.remove('blink')
@@ -16,7 +7,7 @@ runSolver = async (difficulty, prefix) => {
   return nonce
 }
 
-sendResult = async (nonce, redirect) => {
+const sendResult = async (nonce, redirect) => {
   try {
     const response = await fetch('/pow', {
       method: 'POST',
@@ -48,6 +39,15 @@ sendResult = async (nonce, redirect) => {
       }, 3000)
     }
   } catch (err) {
-    console.log(err)
+    console.log('Error')
   }
+}
+
+window.init = (difficulty, prefix, redirect) => {
+  setTimeout(async () => {
+    const nonce = await runSolver(difficulty, prefix)
+    setTimeout(async () => {
+      await sendResult(nonce, redirect)
+    }, 500)
+  }, 1500)
 }

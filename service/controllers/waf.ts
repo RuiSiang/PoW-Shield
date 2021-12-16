@@ -47,7 +47,7 @@ class Waf {
       fs.readFileSync(path.join(process.cwd(), 'wafRules.json')).toString()
     )
 
-    for (let key in this.types) {
+    for (const key in this.types) {
       this.types[this.types[key]] = key
     }
     rulesJson.forEach((rule: _Rule) => {
@@ -62,9 +62,9 @@ class Waf {
 
   private parseNumString = (numString: string) => {
     const substrings = numString.split(',')
-    let numArr: number[] = []
+    const numArr: number[] = []
     substrings.forEach(function (item) {
-      if (!!item) {
+      if (item) {
         const tmpArr = item.split('-')
         if (tmpArr.length == 2) {
           const low = parseInt(tmpArr[0])
@@ -81,7 +81,7 @@ class Waf {
   }
 
   private detect = (test: string, excludes: number[]) => {
-    for (let key in this.entries) {
+    for (const key in this.entries) {
       if (!excludes.includes(parseInt(key))) {
         if (this.entries[key].test(test) === true) {
           return key
@@ -95,7 +95,7 @@ class Waf {
     if (config.waf) {
       const urlExcludeRules = this.parseNumString(config.waf_url_exclude_rules)
       const urlResult = this.detect(ctx.url, urlExcludeRules)
-      if (!!urlResult) {
+      if (urlResult) {
         return {
           id: urlResult,
           type: this.types[this.rules[urlResult].type],
@@ -125,7 +125,7 @@ class Waf {
         JSON.stringify(ctx.request.body),
         bodyExcludeRules
       )
-      if (!!bodyResult) {
+      if (bodyResult) {
         return {
           id: bodyResult,
           type: this.types[this.rules[bodyResult].type],

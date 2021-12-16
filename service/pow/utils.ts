@@ -14,6 +14,7 @@ const writeTimestamp = (buffer: Buffer, ts: number, off: number): number => {
 }
 
 const readTimestamp = (buffer: Buffer, off: number) => {
+  // skipcq: JS-0377
   return buffer.readUInt32BE(off) * 0x100000000 + buffer.readUInt32BE(off + 4)
 }
 
@@ -29,7 +30,7 @@ const checkComplexity = (hash: Buffer, complexity: number): boolean => {
     throw 'Complexity is too high'
   }
   let off = 0
-  let i: number
+  let i = 0
   for (i = 0; i <= complexity - 8; i += 8, off++) {
     if (hash[off] !== 0) return false
   }

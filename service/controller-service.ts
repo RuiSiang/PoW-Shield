@@ -31,11 +31,12 @@ export const controller: Koa.Middleware = async function (
           await next()
           return
         } else {
-          ctx.redirect(`/pow?redirect=${ctx.request.url}`)
+          ctx.redirect(`/pow?redirect=${ctx.request.url as string}`)
           return
         }
       }
     } else {
+      // skipcq: JS-0002
       console.log(
         `Rule ${scanResult.id}: "${scanResult.cmt}" in category "${
           scanResult.type

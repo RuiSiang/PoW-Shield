@@ -24,12 +24,12 @@ export class Verifier {
     if (nonce.length < minNonceSize || nonce.length > maxNonceSize) {
       return false
     }
-    const diff = (utils.readTimestamp(nonce, 0)) - Date.now()
+    const diff = utils.readTimestamp(nonce, 0) - Date.now()
     if (Math.abs(diff) > this.validity) {
       return false
     }
     const hash = utils.hash(nonce, prefix)
-    if (!(utils.checkComplexity(hash, complexity))) {
+    if (!utils.checkComplexity(hash, complexity)) {
       return false
     }
     return true
