@@ -14,10 +14,8 @@ const writeTimestamp = (buffer: Buffer, ts: number, off: number): number => {
 }
 
 const readTimestamp = (buffer: Buffer, off: number) => {
-  return (
-    ((buffer.readUInt32BE(off) * 0x100000000) as number) +
-    buffer.readUInt32BE(off + 4)
-  )
+  // skipcq: JS-0377
+  return buffer.readUInt32BE(off) * 0x100000000 + buffer.readUInt32BE(off + 4)
 }
 
 const hash = (nonce: Buffer, prefix: string) => {
