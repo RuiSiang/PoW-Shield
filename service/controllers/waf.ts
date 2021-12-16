@@ -64,7 +64,7 @@ class Waf {
     const substrings = numString.split(',')
     const numArr: number[] = []
     substrings.forEach(function (item) {
-      if (!!item) {
+      if (item) {
         const tmpArr = item.split('-')
         if (tmpArr.length == 2) {
           const low = parseInt(tmpArr[0])
@@ -95,7 +95,7 @@ class Waf {
     if (config.waf) {
       const urlExcludeRules = this.parseNumString(config.waf_url_exclude_rules)
       const urlResult = this.detect(ctx.url, urlExcludeRules)
-      if (!!urlResult) {
+      if (urlResult) {
         return {
           id: urlResult,
           type: this.types[this.rules[urlResult].type],
@@ -125,7 +125,7 @@ class Waf {
         JSON.stringify(ctx.request.body),
         bodyExcludeRules
       )
-      if (!!bodyResult) {
+      if (bodyResult) {
         return {
           id: bodyResult,
           type: this.types[this.rules[bodyResult].type],
