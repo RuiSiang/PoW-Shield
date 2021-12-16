@@ -7,13 +7,15 @@ beforeAll(() => {
 })
 
 describe(`WAF`, () => {
-  it('should detect malicious string', async () => {
+  it('should detect malicious string', () => {
     expect(waf.test('select column from database', [])).toEqual('116')
   })
-  it('should return first rule triggered', async () => {
-    expect(waf.test('select column from database where column like %asdf%', [])).toEqual('37')
+  it('should return first rule triggered', () => {
+    expect(
+      waf.test('select column from database where column like %asdf%', [])
+    ).toEqual('37')
   })
-  it('should ignore malicious string if excluded', async () => {
+  it('should ignore malicious string if excluded', () => {
     expect(waf.test('select column from database', [116])).toEqual(0)
   })
 })
