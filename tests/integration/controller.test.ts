@@ -1,7 +1,7 @@
 import puppeteer from 'puppeteer'
 
-let browser: puppeteer.Browser
-let page: puppeteer.Page
+let browser: puppeteer.Browser // skipcq: JS-0309
+let page: puppeteer.Page // skipcq: JS-0309
 
 beforeEach(async () => {
   browser = await puppeteer.launch()

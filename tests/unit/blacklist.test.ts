@@ -1,6 +1,6 @@
 import Blacklist from '../../service/controllers/blacklist'
 
-let blacklist: Blacklist
+let blacklist: Blacklist // skipcq: JS-0309
 
 beforeAll(() => {
   blacklist = Blacklist.getInstance()

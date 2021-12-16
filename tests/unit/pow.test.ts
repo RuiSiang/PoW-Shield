@@ -1,8 +1,8 @@
 import Pow from '../../service/pow-service'
 import { Solver } from '../../service/pow/solver'
 
-let pow: Pow
-let solver: Solver
+let pow: Pow // skipcq: JS-0309
+let solver: Solver // skipcq: JS-0309
 
 beforeAll(() => {
   pow = new Pow(3)
@@ -10,7 +10,7 @@ beforeAll(() => {
 })
 
 describe(`PoW service`, () => {
-  let powData: any
+  let powData: any // skipcq: JS-0309
   it('should be able to generate problems', () => {
     powData = pow.getProblem()
     expect(powData.difficulty).toEqual(3)

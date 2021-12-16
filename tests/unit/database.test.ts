@@ -1,6 +1,6 @@
 import Database from '../../service/util/database-service'
 
-let db: Database
+let db: Database // skipcq: JS-0309
 
 beforeAll(() => {
   db = Database.getInstance()

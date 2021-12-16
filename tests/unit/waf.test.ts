@@ -1,6 +1,6 @@
 import Waf from '../../service/controllers/waf'
 
-let waf: Waf
+let waf: Waf // skipcq: JS-0309
 
 beforeAll(() => {
   waf = Waf.getInstance()
