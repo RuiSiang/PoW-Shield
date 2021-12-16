@@ -8,7 +8,7 @@ class Solver {
     complexity: number,
     prefix: string
   ): Buffer => {
-    let nonce = Buffer.alloc(nonceSize)
+    const nonce = Buffer.alloc(nonceSize)
     while (true) {
       this.genNonce(nonce)
       const hash = utils.hash(nonce, prefix)
