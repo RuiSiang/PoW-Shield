@@ -29,7 +29,7 @@ const checkComplexity = (hash: Buffer, complexity: number): boolean => {
     throw 'Complexity is too high'
   }
   let off = 0
-  let i: number = 0
+  let i = 0
   for (i = 0; i <= complexity - 8; i += 8, off++) {
     if (hash[off] !== 0) return false
   }
