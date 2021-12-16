@@ -1,12 +1,3 @@
-window.init = async (difficulty, prefix, redirect) => {
-  setTimeout(async () => {
-    const nonce = await runSolver(difficulty, prefix)
-    setTimeout(async () => {
-      await sendResult(nonce, redirect)
-    }, 500)
-  }, 1500)
-}
-
 const runSolver = async (difficulty, prefix) => {
   const solver = new powSolver()
   const nonce = await solver.solve(difficulty, prefix)
@@ -49,4 +40,13 @@ const sendResult = async (nonce, redirect) => {
     }
   } catch (err) {
   }
+}
+
+window.init = async (difficulty, prefix, redirect) => {
+  setTimeout(async () => {
+    const nonce = await runSolver(difficulty, prefix)
+    setTimeout(async () => {
+      await sendResult(nonce, redirect)
+    }, 500)
+  }, 1500)
 }
