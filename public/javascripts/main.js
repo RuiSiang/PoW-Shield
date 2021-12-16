@@ -1,5 +1,5 @@
 const runSolver = async (difficulty, prefix) => {
-  const solver = new powSolver()
+  const solver = new powSolver() // skipcq: JS-0125
   const nonce = await solver.solve(difficulty, prefix)
   document.querySelector('.calculating td.blink').innerHTML = 'V'
   document.querySelector('.calculating td.blink').classList.remove('blink')
