@@ -42,7 +42,7 @@ const sendResult = async (nonce, redirect) => {
   }
 }
 
-window.init = async (difficulty, prefix, redirect) => {
+window.init = (difficulty, prefix, redirect) => {
   setTimeout(async () => {
     const nonce = await runSolver(difficulty, prefix)
     setTimeout(async () => {
