@@ -14,7 +14,10 @@ function onError(error: any) {
   if (error.syscall !== 'listen') {
     throw error
   }
-  const bind = typeof port === 'string' ? `Pipe ${port}` : `Port ${port}`
+  const bind =
+    typeof port === 'string'
+      ? `Pipe ${port as string}`
+      : `Port ${port.toString()}`
   switch (error.code) {
     case 'EACCES':
       // skipcq: JS-0002
@@ -31,7 +34,10 @@ function onError(error: any) {
 function onListening() {
   const addr = server.address()
   if (addr) {
-    const bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`
+    const bind =
+      typeof addr === 'string'
+        ? `pipe ${addr as string}`
+        : `port ${addr.port.toString()}`
     debug('Listening on ' + bind)
   }
 }

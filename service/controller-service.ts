@@ -31,7 +31,7 @@ export const controller: Koa.Middleware = async function (
           await next()
           return
         } else {
-          ctx.redirect(`/pow?redirect=${ctx.request.url}`)
+          ctx.redirect(`/pow?redirect=${ctx.request.url as string}`)
           return
         }
       }
