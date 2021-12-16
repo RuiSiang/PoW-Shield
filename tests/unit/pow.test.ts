@@ -17,7 +17,7 @@ describe(`PoW service`, () => {
     expect(powData.prefix).toMatch(/[0-9a-f]{16}/)
   })
 
-  it('should be able to generate nonce for problem', async () => {
+  it('should be able to generate nonce for problem', () => {
     powData.nonce = JSON.stringify(
       (solver.solve(powData.difficulty, powData.prefix)).toJSON()
     )
