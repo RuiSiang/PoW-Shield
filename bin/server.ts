@@ -10,7 +10,7 @@ server.listen(port)
 server.on('error', onError)
 server.on('listening', onListening)
 
-function onError(error: any) {
+function onError(error: any) { // skipcq: JS-0323
   if (error.syscall !== 'listen') {
     throw error
   }

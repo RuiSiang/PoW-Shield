@@ -10,7 +10,7 @@ beforeAll(() => {
 })
 
 describe(`PoW service`, () => {
-  let powData: any // skipcq: JS-0309
+  let powData: any // skipcq: JS-0309, JS-0323
   it('should be able to generate problems', () => {
     powData = pow.getProblem()
     expect(powData.difficulty).toEqual(3)
@@ -19,7 +19,7 @@ describe(`PoW service`, () => {
 
   it('should be able to generate nonce for problem', async () => {
     powData.nonce = JSON.stringify(
-      (await solver.solve(powData.difficulty, powData.prefix)).toJSON()
+      (solver.solve(powData.difficulty, powData.prefix)).toJSON()
     )
     expect(powData.nonce).not.toBeNull()
   })
