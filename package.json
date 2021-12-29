@@ -49,7 +49,7 @@
     "@types/randomstring": "1.1.8",
     "browserify": "17.0.0",
     "jest": "27.4.5",
-    "jest-html-reporters": "2.1.7",
+    "jest-html-reporters": "3.0.1",
     "jest-puppeteer": "6.0.3",
     "merge": "2.1.1",
     "puppeteer": "13.0.1",
