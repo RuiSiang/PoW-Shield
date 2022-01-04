@@ -2,7 +2,7 @@ name: Docker Image CI
 
 on:
   workflow_run:
-    workflows: ['nodejs-ci']
+    workflows: ['Nodejs CI']
     branches: [main]
     types:
       - completed
