@@ -49,21 +49,14 @@ app.use(
 )
 app.use(json())
 app.use(logger())
-app.use(require('koa-static')(__dirname + '/public'))
+// skipcq: JS-0359
+app.use(require('koa-static')(`${<string>__dirname}/public`))
 
 app.use(
-  views(__dirname + '/views', {
+  views(`${<string>__dirname}/views`, {
     extension: 'pug',
   })
 )
-
-// logger
-app.use(async (ctx, next) => {
-  const start: any = new Date()
-  await next()
-  const ms = <any>new Date() - start
-  console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
-})
 
 // service and routes
 if (process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'standalone') {
@@ -77,6 +70,7 @@ app.use(c2k(proxy))
 
 // error-handling
 app.on('error', (err, ctx) => {
+  // skipcq: JS-0002
   console.error('server error', err, ctx)
 })
 

@@ -1,5 +1,6 @@
 # Test Report
 jest-report.html
+jest-html-reporters-attach
 
 # Compose File
 docker-compose.yaml

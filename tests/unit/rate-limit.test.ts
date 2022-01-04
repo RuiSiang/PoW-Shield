@@ -1,6 +1,6 @@
 import RateLimiter from '../../service/controllers/rate-limiter'
 
-let ratelimiter: RateLimiter
+let ratelimiter: RateLimiter // skipcq: JS-0309
 
 beforeAll(() => {
   ratelimiter = RateLimiter.getInstance()

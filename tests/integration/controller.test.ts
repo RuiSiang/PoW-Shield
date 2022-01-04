@@ -1,10 +1,10 @@
-import { launch, Browser, Page } from 'puppeteer'
+import puppeteer from 'puppeteer'
 
-let browser: Browser
-let page: Page
+let browser: puppeteer.Browser // skipcq: JS-0309
+let page: puppeteer.Page // skipcq: JS-0309
 
 beforeEach(async () => {
-  browser = await launch()
+  browser = await puppeteer.launch()
   page = await browser.newPage()
 
   await page.goto('http://localhost:3000')

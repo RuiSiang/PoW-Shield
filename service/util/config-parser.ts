@@ -23,7 +23,7 @@ interface Config {
   waf_body_exclude_rules: string
 }
 
-let config: Config
+let config: Config // skipcq: JS-0309
 
 if (process.env.NODE_ENV === 'test') {
   config = {

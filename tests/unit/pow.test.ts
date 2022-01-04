@@ -1,8 +1,8 @@
 import Pow from '../../service/pow-service'
 import { Solver } from '../../service/pow/solver'
 
-let pow: Pow
-let solver: Solver
+let pow: Pow // skipcq: JS-0309
+let solver: Solver // skipcq: JS-0309
 
 beforeAll(() => {
   pow = new Pow(3)
@@ -10,16 +10,16 @@ beforeAll(() => {
 })
 
 describe(`PoW service`, () => {
-  let powData: any
-  it('should be able to generate problems', async () => {
-    powData = await pow.getProblem()
+  let powData: any // skipcq: JS-0309, JS-0323
+  it('should be able to generate problems', () => {
+    powData = pow.getProblem()
     expect(powData.difficulty).toEqual(3)
     expect(powData.prefix).toMatch(/[0-9a-f]{16}/)
   })
 
-  it('should be able to generate nonce for problem', async () => {
+  it('should be able to generate nonce for problem', () => {
     powData.nonce = JSON.stringify(
-      (await solver.solve(powData.difficulty, powData.prefix)).toJSON()
+      (solver.solve(powData.difficulty, powData.prefix)).toJSON()
     )
     expect(powData.nonce).not.toBeNull()
   })
