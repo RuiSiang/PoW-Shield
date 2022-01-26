@@ -1,4 +1,4 @@
-<h1 align="center"><img src="https://raw.githubusercontent.com/RuiSiang/PoW-Shield/main/screenshot.jpg" alt="PoW Shield"></h1>
+<img height=auto width=100% src="https://raw.githubusercontent.com/RuiSiang/PoW-Shield/main/screenshot.jpg" alt="PoW Shield">
 <div align="center">
   <img src="https://github.com/RuiSiang/PoW-Shield/actions/workflows/nodejs-ci.yml/badge.svg">
   <img src="https://github.com/RuiSiang/PoW-Shield/actions/workflows/njsscan-analysis.yml/badge.svg">
