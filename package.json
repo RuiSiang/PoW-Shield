@@ -17,7 +17,7 @@
     "dotenv": "15.0.0",
     "http-proxy-middleware": "2.0.2",
     "ioredis": "4.28.3",
-    "ioredis-mock": "6.13.0",
+    "ioredis-mock": "7.0.0",
     "koa": "2.13.4",
     "koa-bodyparser": "4.3.0",
     "koa-json": "2.0.2",
