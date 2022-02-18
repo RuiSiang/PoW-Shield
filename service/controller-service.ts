@@ -27,7 +27,7 @@ export const controller: Koa.Middleware = async function (
         if (ctx.request.url == '/') {
           ctx.redirect('/pow')
           return
-        } else if (ctx.request.url == '/pow') {
+        } else if (RegExp(`^\/pow`).test(ctx.request.url)) {
           await next()
           return
         } else {

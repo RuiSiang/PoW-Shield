@@ -7,7 +7,7 @@ beforeAll(async () => {
   browser = await puppeteer.launch()
   page = await browser.newPage()
 
-  await page.goto('http://localhost:3000')
+  await page.goto('http://localhost:3000/endpoint?query=some-value')
 })
 
 describe('PoW page', () => {
@@ -15,8 +15,8 @@ describe('PoW page', () => {
     expect(await page.title()).toEqual('PoW Shield')
   })
 
-  it('should redirect to "/pow"', () => {
-    expect(page.url()).toEqual('http://localhost:3000/pow')
+  it('should redirect to "/pow" with redirection url and query intact', () => {
+    expect(page.url()).toEqual('http://localhost:3000/pow?redirect=/endpoint?query=some-value')
   })
 
   it('should contain "Ray ID"', async () => {
@@ -40,7 +40,7 @@ describe('PoW nonce submission', () => {
 describe('PoW proxy', () => {
   it('should now proxy traffic to/from "example.org"', async () => {
     await page.waitForNavigation()
-    expect(page.url()).toEqual('http://localhost:3000/')
+    expect(page.url()).toEqual('http://localhost:3000/endpoint?query=some-value')
     expect(await page.title()).toEqual('Example Domain')
     expect(await page.content()).toContain('Example Domain')
   })
