@@ -21,6 +21,9 @@ interface Config {
   waf_url_exclude_rules: string
   waf_header_exclude_rules: string
   waf_body_exclude_rules: string
+  ssl: boolean
+  ssl_cert_path: string
+  ssl_key_path: string
 }
 
 let config: Config // skipcq: JS-0309
@@ -42,6 +45,9 @@ if (process.env.NODE_ENV === 'test') {
     waf_url_exclude_rules: '',
     waf_header_exclude_rules: '14,33,80,96,100',
     waf_body_exclude_rules: '',
+    ssl: false,
+    ssl_cert_path: 'tests/ssl/mock-cert.pem',
+    ssl_key_path: 'tests/ssl/mock-key.pem',
   }
 } else {
   config = {
@@ -74,6 +80,9 @@ if (process.env.NODE_ENV === 'test') {
     waf_header_exclude_rules:
       process.env.WAF_HEADER_EXCLUDE_RULES || '14,33,80,96,100',
     waf_body_exclude_rules: process.env.WAF_BODY_EXCLUDE_RULES || '',
+    ssl: (process.env.SSL || 'off') == 'on',
+    ssl_cert_path: process.env.SSL_CERT_PATH || 'tests/ssl/mock-cert.pem',
+    ssl_key_path: process.env.SSL_KEY_PATH || 'tests/ssl/mock-key.pem',
   }
 }
 
