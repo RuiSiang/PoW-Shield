@@ -3,7 +3,6 @@ const app = new Koa()
 import views from 'koa-views'
 import json from 'koa-json'
 import bodyparser from 'koa-bodyparser'
-import logger from 'koa-logger'
 import { createProxyMiddleware } from 'http-proxy-middleware'
 import c2k from 'koa2-connect'
 import session from 'koa-session-minimal'
@@ -48,7 +47,6 @@ app.use(
   })
 )
 app.use(json())
-app.use(logger())
 // skipcq: JS-0359
 app.use(require('koa-static')(`${<string>__dirname}/public`))
 

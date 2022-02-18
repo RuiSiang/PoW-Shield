@@ -163,6 +163,46 @@ docker-compose -f docker-compose.yaml up
 ####################################################
 ```
 
+## Stress Test
+
+Note: This only works on non-containerized version of PoW Shield, and that your system might experience unstability when running the test.
+
+```bash
+# Start the stress test
+npm run stress
+
+# If you changed the PORT variable in .env, you should also change the target variable in the stress test script
+nano scripts/stress.sh
+```
+
+_The following tests are are conducted on a single thread of a i7-10870H CPU with a 60 second period for each concurrent parameter._
+
+### Mass GET
+
+| Concurrent Connections | Avg Latency | Error Rate | Requests/Second |
+| ---------------------: | ----------: | ---------: | --------------: |
+|                     64 |      15.3ms |     0.0000 |            4188 |
+|                    128 |      30.2ms |     0.0000 |            4229 |
+|                    256 |      60.4ms |     0.0000 |            4235 |
+|                    512 |     122.6ms |     0.0142 |            4166 |
+|                   1024 |     261.7ms |     0.1766 |            3894 |
+|                   2048 |    1966.5ms |     0.4979 |            1027 |
+|                   4096 |      4685ms |     0.7179 |             838 |
+
+### Nonce Flood
+
+| Concurrent Connections | Avg Latency | Error Rate | Requests/Second |
+| ---------------------: | ----------: | ---------: | --------------: |
+|                     64 |      15.6ms |        N/A |            4094 |
+|                    128 |      31.5ms |        N/A |            4058 |
+|                    256 |      61.5ms |        N/A |            4159 |
+|                    512 |     129.5ms |        N/A |            3945 |
+|                   1024 |     264.4ms |        N/A |            3858 |
+|                   2048 |     592.1ms |        N/A |            3407 |
+|                   4096 |    1212.6ms |        N/A |            3322 |
+
+From the above sample, we can see that the appropriate max load estimate for PoW Shield is around 512 concurrent connections. Error rates and latencies deteriorate beyond normal acceptance afterwards. Hence in a load-balanced environment on the machine (1 PoW Shield instance on each of it's 8 cores), it should be able to handle a maximum of approximately 4096 concurrent connections (clients) at a total request rate of 32k requests/second.
+
 ## References
 
 - Proof-of-work by Fedor Indutny (PoW utility functions)
