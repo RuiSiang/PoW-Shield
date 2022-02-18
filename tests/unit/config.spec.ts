@@ -24,6 +24,9 @@ describe('Configuration', () => {
       waf_url_exclude_rules: '',
       waf_header_exclude_rules: '14,33,80,96,100',
       waf_body_exclude_rules: '',
+      ssl: false,
+      ssl_cert_path: 'tests/ssl/mock-cert.pem',
+      ssl_key_path: 'tests/ssl/mock-key.pem',
     })
   })
 })
