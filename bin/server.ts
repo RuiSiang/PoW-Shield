@@ -28,8 +28,7 @@ const server: https.Server | http.Server = config.ssl
     )
   : http.createServer(app.callback())
 
-function onError(error: any) {
-  // skipcq: JS-0323
+function onError(error: any) { // skipcq: JS-0323
   if (error.syscall !== 'listen') {
     throw error
   }
