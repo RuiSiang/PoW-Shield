@@ -19,7 +19,7 @@
 
 ## Description
 
-PoW Shield provides DDoS protection on OSI application layer by acting as a proxy that utilizes proof of work between the backend service and the end user. This project aims to provide an alternative to general captcha methods such as Google's ReCaptcha that has always been a pain to solve. Accessing a web service protected by PoW Shield has never been easier, simply go to the url, and your browser will do the rest of the verification automatically for you.
+PoW Shield provides DDoS protection on OSI application layer by acting as a proxy that utilizes proof of work between the backend service and the end user. This project aims to provide an alternative to general anti-DDoS methods such as Google's ReCaptcha that has always been a pain to solve. Accessing a web service protected by PoW Shield has never been easier, simply go to the url, and your browser will do the rest of the verification automatically for you.
 
 PoW Shield aims to provide the following services bundled in a single webapp / docker image:
 
@@ -46,6 +46,7 @@ PoW Shield aims to provide the following services bundled in a single webapp / d
 - Unit Testing
 - WAF Implementation
 - Multi-Instance Syncing (Redis)
+- SSL Support
 
 ## How it Works
 
