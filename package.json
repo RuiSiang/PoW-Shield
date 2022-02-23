@@ -40,7 +40,7 @@
     "@types/cron": "1.7.3",
     "@types/debug": "4.1.7",
     "@types/ioredis": "4.28.8",
-    "@types/jest": "27.4.0",
+    "@types/jest": "27.4.1",
     "@types/koa": "2.13.4",
     "@types/koa-bodyparser": "4.3.5",
     "@types/koa-json": "2.0.20",
