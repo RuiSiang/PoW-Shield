@@ -19,7 +19,7 @@
     "http-proxy-middleware": "2.0.3",
     "https": "1.0.0",
     "ioredis": "4.28.5",
-    "ioredis-mock": "7.0.0",
+    "ioredis-mock": "7.0.1",
     "koa": "2.13.4",
     "koa-bodyparser": "4.3.0",
     "koa-json": "2.0.2",
