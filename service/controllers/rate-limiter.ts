@@ -1,5 +1,5 @@
 import moment from 'moment'
-import Database from '../util/database-service'
+import NoSql from '../util/nosql'
 import Blacklist from './blacklist'
 import config from '../util/config-parser'
 
@@ -12,7 +12,7 @@ class RateLimiter {
     return RateLimiter.instance
   }
 
-  private db: Database = Database.getInstance()
+  private nosql: NoSql = NoSql.getInstance()
   private blacklist: Blacklist = Blacklist.getInstance()
   public process = async (
     ip: string,
@@ -56,17 +56,17 @@ class RateLimiter {
     }
   }
   private add = async (ip: string) => {
-    await this.db.set(
-      `req-${ip}`,
+    await this.nosql.set(
+      `req:${ip}`,
       '0',
       true,
       config.rate_limit_sample_minutes * 60
     )
-    await this.db.incr(`req-${ip}`)
+    await this.nosql.incr(`req:${ip}`)
   }
 
   private get = async (ip: string) => {
-    const reqCnt = await this.db.get(`req-${ip}`)
+    const reqCnt = await this.nosql.get(`req:${ip}`)
 
     if (reqCnt === null) {
       return 0
@@ -76,9 +76,9 @@ class RateLimiter {
   }
   public triggerReset = async () => {
     if (process.env.NODE_ENV === 'test') {
-      const reqKeys = await this.db.keys('req-*')
+      const reqKeys = await this.nosql.keys('req:*')
       for (let i = 0; i < reqKeys.length; i++) {
-        await this.db.del(reqKeys[i])
+        await this.nosql.del(reqKeys[i])
       }
     }
   }
