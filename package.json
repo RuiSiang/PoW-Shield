@@ -51,7 +51,7 @@
     "@types/randomstring": "1.1.8",
     "browserify": "17.0.0",
     "jest": "27.5.1",
-    "jest-html-reporters": "3.0.5",
+    "jest-html-reporters": "3.0.6",
     "jest-puppeteer": "6.1.0",
     "loadtest": "5.2.0",
     "merge": "2.1.1",
