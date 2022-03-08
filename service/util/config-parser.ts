@@ -6,7 +6,7 @@ interface Config {
   session_key: string
   pow: boolean
   nonce_validity: number
-  initial_difficulty: number
+  difficulty: number
   backend_url: string
   database_host?: string
   database_port?: number
@@ -24,6 +24,9 @@ interface Config {
   ssl: boolean
   ssl_cert_path: string
   ssl_key_path: string
+  socket: boolean
+  socket_url: string
+  socket_token: string
 }
 
 let config: Config // skipcq: JS-0309
@@ -33,7 +36,7 @@ if (process.env.NODE_ENV === 'test') {
     session_key: 'abcdefghijklmnop',
     pow: true,
     nonce_validity: 60000,
-    initial_difficulty: 5,
+    difficulty: 5,
     backend_url: 'http://example.org',
     rate_limit: true,
     rate_limit_sample_minutes: 10,
@@ -48,13 +51,16 @@ if (process.env.NODE_ENV === 'test') {
     ssl: false,
     ssl_cert_path: 'tests/ssl/mock-cert.pem',
     ssl_key_path: 'tests/ssl/mock-key.pem',
+    socket: false,
+    socket_url: 'http://localhost:6000',
+    socket_token: 'test-subscription-api',
   }
 } else {
   config = {
     session_key: process.env.SESSION_KEY || 'abcdefghijklmnop',
     pow: (process.env.POW || 'on') == 'on',
     nonce_validity: parseInt(process.env.NONCE_VALIDITY || '') || 60 * 1000,
-    initial_difficulty: parseInt(process.env.INITIAL_DIFFICULTY || '') || 13,
+    difficulty: parseInt(process.env.DIFFICULTY || '') || 13,
     backend_url: process.env.BACKEND_URL || 'http://www.example.com',
     database_host: process.env.DATABASE_HOST || '127.0.0.1',
     database_port: process.env.DATABASE_PORT
@@ -83,6 +89,9 @@ if (process.env.NODE_ENV === 'test') {
     ssl: (process.env.SSL || 'off') == 'on',
     ssl_cert_path: process.env.SSL_CERT_PATH || 'tests/ssl/mock-cert.pem',
     ssl_key_path: process.env.SSL_KEY_PATH || 'tests/ssl/mock-key.pem',
+    socket: (process.env.SOCKET || 'off') == 'on',
+    socket_url: process.env.SOCKET_URL || 'http://localhost:6000',
+    socket_token: process.env.SOCKET_TOKEN || 'test-subscription-api',
   }
 }
 

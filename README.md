@@ -79,7 +79,7 @@ You can configure PoW Shield via the following methods.
 | DATABASE_PASSWORD            | Redis      | null                    | redis service password                                                                                                                                            |
 | POW                          | PoW        | on                      | toggles PoW functionality on/off (if not temporary switched off, why use this project at all?)                                                                    |
 | NONCE_VALIDITY               | PoW        | 60000                   | specifies the maximum seconds a nonce has to be submitted to the server after generation(used to enforce difficulty change and filter out stale nonces)           |
-| INITIAL_DIFFICULTY           | PoW        | 13                      | initial difficulty, number of leading 0-bits in produced hash (0:extremely easy ~ 256:impossible, 13(default) takes about 5 seconds for the browser to calculate) |
+| DIFFICULTY                   | PoW        | 13                      | problem difficulty, number of leading 0-bits in produced hash (0:extremely easy ~ 256:impossible, 13(default) takes about 5 seconds for the browser to calculate) |
 | RATE_LIMIT                   | Rate Limit | on                      | toggles ratelimit functionality on/off                                                                                                                            |
 | RATE_LIMIT_SAMPLE_MINUTES    | Rate Limit | 60                      | specifies how many minutes until statistics reset for session/ip                                                                                                  |
 | RATE_LIMIT_SESSION_THRESHOLD | Rate Limit | 100                     | number of requests that a single session can make until triggering token revocation                                                                               |
@@ -93,6 +93,9 @@ You can configure PoW Shield via the following methods.
 | SSL                          | SSL        | off                     | toggles SSL functionality on/off                                                                                                                                  |
 | SSL_CERT_PATH                | SSL        | tests/ssl/mock-cert.pem | path to SSL certificate password                                                                                                                                  |
 | SSL_KEY_PATH                 | SSL        | tests/ssl/mock-key.pem  | path to SSL key                                                                                                                                                   |
+| SOCKET                       | Socket     | off                     | toggles socket functionality on/off                                                                                                                               |
+| SOCKET_URL                   | Socket     |                         | location of PoW Phalanx controller, IP and URLs are both accepted(accepts protocol://url:port or protocol://ip:port)                                              |
+| SOCKET_TOKEN                 | Socket     |                         | subscription token for PoW Phalanx controller                                                                                                                     |
 
 ## Usage
 

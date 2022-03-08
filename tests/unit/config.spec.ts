@@ -12,7 +12,7 @@ describe('Configuration', () => {
       session_key: 'abcdefghijklmnop',
       pow: true,
       nonce_validity: 60000,
-      initial_difficulty: 5,
+      difficulty: 5,
       backend_url: 'http://example.org',
       rate_limit: true,
       rate_limit_sample_minutes: 10,

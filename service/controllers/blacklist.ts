@@ -1,5 +1,6 @@
 import NoSql from '../util/nosql'
 import config from '../util/config-parser'
+import Client from '../util/socket'
 
 class Blacklist {
   private static instance: Blacklist
@@ -12,20 +13,25 @@ class Blacklist {
 
   private nosql: NoSql = NoSql.getInstance()
   public check = async (ip: string) => {
-    const blk = await this.nosql.get(`blk:${ip}`)
-    if (blk!='1') {
+    const ban = await this.nosql.get(`ban:${ip}`)
+    if (ban != '1') {
       return true
     }
     return false || !config.rate_limit
   }
   public ban = async (ip: string, minutes: number) => {
-    await this.nosql.set(`blk:${ip}`, '1', true, minutes * 60)
+    await this.nosql.setNX(`ban:${ip}`, '1', true, minutes * 60)
+    if (config.socket) {
+      Client.getInstance().send(
+        JSON.stringify({ method: 'ban', arguments: [ip] })
+      )
+    }
   }
   public triggerReset = async () => {
     if (process.env.NODE_ENV === 'test') {
-      const blkKeys = await this.nosql.keys('blk:*')
-      for (let i = 0; i < blkKeys.length; i++) {
-        await this.nosql.del(blkKeys[i])
+      const banKeys = await this.nosql.keys('ban:*')
+      for (let i = 0; i < banKeys.length; i++) {
+        await this.nosql.del(banKeys[i])
       }
     }
   }

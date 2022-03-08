@@ -33,6 +33,7 @@
     "moment": "2.29.1",
     "pug": "3.0.2",
     "randomstring": "1.2.2",
+    "socket.io-client": "^4.4.1",
     "source-map-loader": "3.0.1"
   },
   "devDependencies": {

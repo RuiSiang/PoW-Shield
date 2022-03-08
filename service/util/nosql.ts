@@ -33,7 +33,7 @@ class NoSql {
   public get = async (key: string) => {
     return await this.dbInstance.get(key)
   }
-  public set = async (
+  public setNX = async (
     key: string,
     value: string,
     setexpr?: boolean,

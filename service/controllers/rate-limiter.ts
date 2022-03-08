@@ -42,30 +42,26 @@ class RateLimiter {
       session.timestamp = moment().toString()
       session.authorized = false
     }
-    if ((await this.get(ip)) >= config.rate_limit_ip_threshold) {
+    if ((await this.getStat(ip)) >= config.rate_limit_ip_threshold) {
       if (config.rate_limit_ban_ip) {
         await this.blacklist.ban(ip, config.rate_limit_ban_minutes)
       }
     }
     session.requests++
-    await this.add(ip)
+    await this.incrStat(ip)
     return {
       requests: session.requests,
       timestamp: session.timestamp,
       authorized: session.authorized,
     }
   }
-  private add = async (ip: string) => {
-    await this.nosql.set(
-      `req:${ip}`,
-      '0',
-      true,
-      config.rate_limit_sample_minutes * 60
-    )
+
+  private incrStat = async (ip: string) => {
     await this.nosql.incr(`req:${ip}`)
+    await this.nosql.incr(`stats:ttlreq`)
   }
 
-  private get = async (ip: string) => {
+  private getStat = async (ip: string) => {
     const reqCnt = await this.nosql.get(`req:${ip}`)
 
     if (reqCnt === null) {
@@ -74,6 +70,7 @@ class RateLimiter {
       return parseInt(reqCnt)
     }
   }
+
   public triggerReset = async () => {
     if (process.env.NODE_ENV === 'test') {
       const reqKeys = await this.nosql.keys('req:*')

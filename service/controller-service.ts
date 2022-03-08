@@ -12,7 +12,7 @@ export const controller: Koa.Middleware = async function (
   const rateLimiter = Ratelimiter.getInstance()
   const waf = Waf.getInstance()
   if (await blacklist.check(ctx.ip)) {
-    const scanResult = waf.scan(ctx)
+    const scanResult = await waf.scan(ctx)
     if (!scanResult) {
       if (!!ctx.session.authorized || !config.pow) {
         if (config.rate_limit) {

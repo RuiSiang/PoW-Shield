@@ -9,7 +9,7 @@ beforeAll(() => {
 
 describe(`NoSql`, () => {
   it('should be settable', async () => {
-    expect(await nosql.set('test', '0')).toStrictEqual('OK')
+    expect(await nosql.setNX('test', '0')).toStrictEqual('OK')
   })
   it('should be gettable', async () => {
     expect(await nosql.get('test')).toStrictEqual('0')

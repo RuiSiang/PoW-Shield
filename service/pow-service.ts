@@ -2,9 +2,6 @@ import randomstring from 'randomstring'
 import Verifier from './pow/verifier'
 
 class Pow {
-  constructor(initDifficulty: number) {
-    this.difficulty = initDifficulty
-  }
 
   public parseAndVerify = async (
     requestBody: string,
@@ -17,14 +14,11 @@ class Pow {
     return this.verify(nonce, session.difficulty, session.prefix)
   }
 
-  public getProblem = (): { difficulty: number; prefix: string } => {
+  public getProblem = (): { prefix: string } => {
     return {
-      difficulty: this.difficulty,
       prefix: randomstring.generate({ length: 16, charset: 'hex' }),
     }
   }
-
-  private difficulty: number
 
   private verify = (
     nonce: Buffer,
