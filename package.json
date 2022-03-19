@@ -39,7 +39,7 @@
     "@types/create-hash": "1.2.2",
     "@types/cron": "1.7.3",
     "@types/debug": "4.1.7",
-    "@types/ioredis": "4.28.9",
+    "@types/ioredis": "4.28.10",
     "@types/jest": "27.4.1",
     "@types/koa": "2.13.4",
     "@types/koa-bodyparser": "4.3.6",
