@@ -29,8 +29,8 @@ export default class Client {
     this.socket.on('connect_error', (err) => {
       console.log(`Phalanx connection error: ${err.message}`)
     })
-    this.socket.on('disconnect', (reason) => {
-      console.log(`Phalanx disconnected: ${reason}`)
+    this.socket.on('disconnect', () => {
+      console.log(`Phalanx disconnected`)
     })
 
     this.socket.on('message', async (message: string) => {
@@ -44,8 +44,11 @@ export default class Client {
             case 'fetch_stats':
               this.send(
                 JSON.stringify({
-                  ttlreq: await this.nosql.get('stats:ttlreq')||'0',
-                  ttlwaf: await this.nosql.get('stats:ttlwaf')||'0',
+                  method: 'update_stats',
+                  arguments: [
+                    (await this.nosql.get('stats:ttlreq')) || '0', //ttlreq
+                    (await this.nosql.get('stats:ttlwaf')) || '0', //ttlwaf
+                  ],
                 })
               )
               break
