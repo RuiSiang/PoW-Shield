@@ -1,10 +1,9 @@
 FROM node:16 AS BUILD_IMAGE
-RUN curl -sfL https://install.goreleaser.com/github.com/tj/node-prune.sh | bash -s -- -b /usr/local/bin
 WORKDIR /build
 COPY . .
-RUN npm ci && npm run build
-RUN npm prune --production
-RUN /usr/local/bin/node-prune
+ARG PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+RUN npm install
+RUN npm run build
 
 FROM node:16-alpine
 WORKDIR /usr/src/pow-shield
