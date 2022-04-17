@@ -30,7 +30,7 @@
     "koa-static": "5.0.0",
     "koa-views": "8.0.0",
     "koa2-connect": "1.0.2",
-    "moment": "2.29.2",
+    "moment": "2.29.3",
     "pug": "3.0.2",
     "randomstring": "1.2.2",
     "source-map-loader": "3.0.1"
