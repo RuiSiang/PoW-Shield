@@ -143,7 +143,7 @@ class Waf {
   }
 
   private incrStat = async () => {
-    await this.nosql.incr(`stats:ttlwaf`)
+    await this.nosql.incr(`stats:ttl_waf`)
   }
 
   public test = (test: string, excludes: number[]): string|0 => {

@@ -1,7 +1,9 @@
 import randomstring from 'randomstring'
 import Verifier from './pow/verifier'
+import NoSql from './util/nosql';
 
 class Pow {
+  private nosql: NoSql = NoSql.getInstance()
 
   public parseAndVerify = async (
     requestBody: string,
@@ -11,7 +13,7 @@ class Pow {
       return false
     }
     const nonce = Buffer.from((await JSON.parse(requestBody)).data)
-    return this.verify(nonce, session.difficulty, session.prefix)
+    return await this.verify(nonce, session.difficulty, session.prefix)
   }
 
   public getProblem = (): { prefix: string } => {
@@ -20,12 +22,16 @@ class Pow {
     }
   }
 
-  private verify = (
+  private verify = async (
     nonce: Buffer,
     difficulty: number,
     prefix: string
-  ): boolean => {
-    return this.verifier.check(nonce, difficulty, prefix)
+  ): Promise<boolean> => {
+    if (!this.verifier.check(nonce, difficulty, prefix)) {
+      await this.nosql.incr(`stats:bad_nonce`)
+      return false
+    }
+    return true
   }
   private verifier = new Verifier({
     validity: 60 * 1000,

@@ -58,7 +58,7 @@ class RateLimiter {
 
   private incrStat = async (ip: string) => {
     await this.nosql.incr(`req:${ip}`)
-    await this.nosql.incr(`stats:ttlreq`)
+    await this.nosql.incr(`stats:legit_req`)
   }
 
   private getStat = async (ip: string) => {

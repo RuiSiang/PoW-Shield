@@ -46,11 +46,19 @@ export default class Client {
                 JSON.stringify({
                   method: 'update_stats',
                   arguments: [
-                    (await this.nosql.get('stats:ttlreq')) || '0', //ttlreq
-                    (await this.nosql.get('stats:ttlwaf')) || '0', //ttlwaf
+                    (await this.nosql.get('stats:legit_req')) || '0', //legit_req
+                    (await this.nosql.get('stats:ttl_req')) || '0', //ttl_req
+                    (await this.nosql.get('stats:bad_nonce')) || '0', //bad_nonce
+                    (await this.nosql.get('stats:ttl_waf')) || '0', //ttl_waf
                   ],
                 })
               )
+              break
+            case 'add_whitelist':
+              await this.nosql.setNX(`wht:${obj.arguments[0]}`, '1')
+              break
+            case 'remove_whitelist':
+              await this.nosql.del(`wht:${obj.arguments[0]}`)
               break
           }
         }
