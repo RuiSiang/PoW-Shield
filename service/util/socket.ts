@@ -60,6 +60,14 @@ export default class Client {
             case 'remove_whitelist':
               await this.nosql.del(`wht:${obj.arguments[0]}`)
               break
+            case 'ban':
+              await this.nosql.setNX(
+                `ban:${obj.arguments[0]}`,
+                '1',
+                true,
+                obj.arguments[1]
+              )
+              break
           }
         }
       } catch (err) {
