@@ -48,6 +48,13 @@ PoW Shield aims to provide the following services bundled in a single webapp / d
 - Multi-Instance Syncing (Redis)
 - SSL Support
 
+Supported via [PoW Phalanx](https://github.com/ruisiang/PoW-Phalanx) controller:
+- Multi-instance Management
+- Whitelist tokens
+- Blacklist IP syncing
+- Dynamic difficulty control
+- Dashboard
+
 ## How it Works
 
 So basically, PoW Shield works as a proxy in front of the actual web app/service. It conducts verification via proof-of-work and only proxies authorized traffic through to the actual server. The proxy is easily installable, and is capable of protecting low security applications with a WAF.
