@@ -68,6 +68,9 @@ export default class Client {
                 obj.arguments[1]
               )
               break
+            case 'update_model':
+              //TODO
+              break
           }
         }
       } catch (err) {
