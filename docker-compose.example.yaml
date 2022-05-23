@@ -10,7 +10,7 @@ services:
       - 'POW=on'
       - 'NONCE_VALIDITY=60000'
       - 'DIFFICULTY=13'
-      - 'BACKEND_URL=http://webapp:3000'
+      - 'BACKEND_URL=http://webapp:80'
       - 'DATABASE_HOST=redis'
       - 'DATABASE_PORT=6379'
       - 'DATABASE_PASSWORD='
@@ -35,4 +35,4 @@ services:
   #####################################
   webapp:
     container_name: webapp
-    image: heroku/nodejs-hello-world
+    image: rancher/hello-world
