@@ -3,16 +3,38 @@ import Blacklist from './controllers/blacklist'
 import config from './util/config-parser'
 import Ratelimiter from './controllers/rate-limiter'
 import Waf from './controllers/waf'
+import NoSql from './util/nosql'
+
+const nosql: NoSql = NoSql.getInstance()
+const uuidTest = new RegExp(
+  '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
+)
 
 export const controller: Koa.Middleware = async function (
   ctx: Koa.ParameterizedContext,
   next: Koa.Next
 ) {
+  if (ctx.query.pow_token && uuidTest.test(ctx.query.pow_token as string)) {
+    if (await nosql.get(`wht:${ctx.query.pow_token}`)) {
+      next()
+      return
+    }
+  }
+  if (
+    ctx.headers['PoW-Token'] &&
+    uuidTest.test(ctx.headers['PoW-Token'] as string)
+  ) {
+    if (await nosql.get(`wht:${ctx.headers['PoW-Token']}`)) {
+      next()
+      return
+    }
+  }
   const blacklist = Blacklist.getInstance()
   const rateLimiter = Ratelimiter.getInstance()
   const waf = Waf.getInstance()
+  await nosql.incr(`stats:ttl_req`)
   if (await blacklist.check(ctx.ip)) {
-    const scanResult = waf.scan(ctx)
+    const scanResult = await waf.scan(ctx)
     if (!scanResult) {
       if (!!ctx.session.authorized || !config.pow) {
         if (config.rate_limit) {

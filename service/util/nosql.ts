@@ -2,18 +2,18 @@ import config from './config-parser'
 import redis, { Redis } from 'ioredis'
 import redisMock from 'ioredis-mock'
 
-class Database {
-  private static instance: Database
+class NoSql {
+  private static instance: NoSql
   public static getInstance() {
-    if (!Database.instance) {
+    if (!NoSql.instance) {
       try {
-        Database.instance = new Database()
+        NoSql.instance = new NoSql()
       } catch (err) {
         // skipcq: JS-0002
         console.log('Redis error, please check redis server status')
       }
     }
-    return Database.instance
+    return NoSql.instance
   }
 
   private dbInstance: Redis
@@ -33,7 +33,7 @@ class Database {
   public get = async (key: string) => {
     return await this.dbInstance.get(key)
   }
-  public set = async (
+  public setNX = async (
     key: string,
     value: string,
     setexpr?: boolean,
@@ -56,4 +56,4 @@ class Database {
   }
 }
 
-export default Database
+export default NoSql

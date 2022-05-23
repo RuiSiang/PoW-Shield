@@ -11,6 +11,7 @@ import config from './service/util/config-parser'
 import powRouter from './routes/pow-router'
 import testRouter from './routes/test-router'
 import { controller } from './service/controller-service'
+import Client from './service/util/socket'
 
 app.keys = [config.session_key]
 app.use(
@@ -57,6 +58,9 @@ app.use(
 )
 
 // service and routes
+if (config.socket) {
+  Client.getInstance()
+}
 if (process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'standalone') {
   app.use(testRouter.routes())
 }

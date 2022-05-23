@@ -5,15 +5,15 @@ import Pow from '../service/pow-service'
 import config from '../service/util/config-parser'
 
 const router = new Router()
-const pow = new Pow(config.initial_difficulty)
+const pow = new Pow()
 
 router.prefix('/pow')
 
 router.get('/', async (ctx: Koa.ParameterizedContext) => {
-  const { difficulty, prefix } = pow.getProblem()
-  await Object.assign(ctx.session, { difficulty, prefix })
+  const { prefix } = pow.getProblem()
+  await Object.assign(ctx.session, { difficulty: config.difficulty, prefix })
   await ctx.render('pow', {
-    difficulty,
+    difficulty: config.difficulty,
     prefix,
     redirect: ctx.query.redirect,
   })

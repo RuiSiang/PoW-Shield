@@ -2,6 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import config from '../util/config-parser'
 import { ParameterizedContext } from 'koa'
+import NoSql from '../util/nosql'
 
 interface Rule {
   reg: RegExp
@@ -18,6 +19,7 @@ interface _Rule {
 
 class Waf {
   private static instance: Waf
+  private nosql: NoSql = NoSql.getInstance()
   public static getInstance(): Waf {
     if (!Waf.instance) {
       Waf.instance = new Waf()
@@ -91,11 +93,12 @@ class Waf {
     return 0
   }
 
-  public scan = (ctx: ParameterizedContext) => {
+  public scan = async (ctx: ParameterizedContext) => {
     if (config.waf) {
       const urlExcludeRules = this.parseNumString(config.waf_url_exclude_rules)
       const urlResult = this.detect(ctx.url, urlExcludeRules)
       if (urlResult) {
+        await this.incrStat()
         return {
           id: urlResult,
           type: this.types[this.rules[urlResult].type],
@@ -111,6 +114,7 @@ class Waf {
         headerExcludeRules
       )
       if (headerResult) {
+        await this.incrStat()
         return {
           id: headerResult,
           type: this.types[this.rules[headerResult].type],
@@ -126,6 +130,7 @@ class Waf {
         bodyExcludeRules
       )
       if (bodyResult) {
+        await this.incrStat()
         return {
           id: bodyResult,
           type: this.types[this.rules[bodyResult].type],
@@ -136,6 +141,11 @@ class Waf {
     }
     return null
   }
+
+  private incrStat = async () => {
+    await this.nosql.incr(`stats:ttl_waf`)
+  }
+
   public test = (test: string, excludes: number[]): string|0 => {
     if (process.env.NODE_ENV === 'test') {
       return this.detect(test, excludes)
