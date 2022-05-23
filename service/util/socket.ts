@@ -24,12 +24,15 @@ export default class Client {
     })
 
     this.socket.on('connect', () => {
+      // skipcq: JS-0002
       console.log(`Phalanx connected`)
     })
     this.socket.on('connect_error', (err) => {
+      // skipcq: JS-0002
       console.log(`Phalanx connection error: ${err.message}`)
     })
     this.socket.on('disconnect', () => {
+      // skipcq: JS-0002
       console.log(`Phalanx disconnected`)
     })
 
@@ -74,11 +77,12 @@ export default class Client {
           }
         }
       } catch (err) {
+        // skipcq: JS-0002
         console.log(err)
       }
     })
   }
-  public send = (message: string) => {
+  public send = (message: string): void => {
     this.socket.emit('message', message)
   }
 }
