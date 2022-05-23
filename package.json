@@ -1,6 +1,6 @@
 {
   "name": "pow-shield",
-  "version": "0.0.1",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "start": "node dist/bin/server.js",
