@@ -41,13 +41,13 @@ export default class Client {
         const obj = JSON.parse(message)
         if (obj.method) {
           switch (obj.method) {
-            case 'set_config':
+            case 'shld_set_config':
               config[obj.arguments[0]] = obj.arguments[1]
               break
-            case 'fetch_stats':
+            case 'shld_fetch_stats':
               this.send(
                 JSON.stringify({
-                  method: 'update_stats',
+                  method: 'phlx_update_stats',
                   arguments: [
                     (await this.nosql.get('stats:legit_req')) || '0', //legit_req
                     (await this.nosql.get('stats:ttl_req')) || '0', //ttl_req
@@ -57,13 +57,13 @@ export default class Client {
                 })
               )
               break
-            case 'add_whitelist':
+            case 'shld_add_whitelist':
               await this.nosql.setNX(`wht:${obj.arguments[0]}`, '1')
               break
-            case 'remove_whitelist':
+            case 'shld_remove_whitelist':
               await this.nosql.del(`wht:${obj.arguments[0]}`)
               break
-            case 'ban':
+            case 'shld_ban_ip':
               await this.nosql.setNX(
                 `ban:${obj.arguments[0]}`,
                 '1',
@@ -71,7 +71,7 @@ export default class Client {
                 obj.arguments[1]
               )
               break
-            case 'update_model':
+            case 'shld_update_model':
               //TODO
               break
           }
