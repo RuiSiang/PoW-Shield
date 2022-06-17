@@ -59,7 +59,7 @@
     "puppeteer": "14.1.2",
     "ts-jest": "28.0.4",
     "typescript": "4.7.3",
-    "uglify-js": "3.16.0",
+    "uglify-js": "3.16.1",
     "uglifyify": "5.0.2"
   }
 }
