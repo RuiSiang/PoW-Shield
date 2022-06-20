@@ -48,6 +48,9 @@ class NoSql {
   public incr = async (key: string) => {
     await this.dbInstance.incr(key)
   }
+  public incrBy = async (key: string, value:number) => {
+    await this.dbInstance.incrby(key, value)
+  }
   public del = async (key: string) => {
     await this.dbInstance.del(key)
   }

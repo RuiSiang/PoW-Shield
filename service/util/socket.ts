@@ -53,6 +53,8 @@ export default class Client {
                     (await this.nosql.get('stats:ttl_req')) || '0', //ttl_req
                     (await this.nosql.get('stats:bad_nonce')) || '0', //bad_nonce
                     (await this.nosql.get('stats:ttl_waf')) || '0', //ttl_waf
+                    (await this.nosql.get('stats:ttl_solve_time')) || '0', //ttl_solve_time
+                    (await this.nosql.get('stats:prob_solved')) || '0', //prob_solved
                   ],
                 })
               )
