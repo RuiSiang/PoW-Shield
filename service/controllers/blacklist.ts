@@ -23,7 +23,7 @@ class Blacklist {
     await this.nosql.setNX(`ban:${ip}`, '1', true, minutes * 60)
     if (config.socket) {
       Client.getInstance().send(
-        JSON.stringify({ method: 'ban', arguments: [ip, minutes * 60] })
+        JSON.stringify({ method: 'phlx_ban_ip', arguments: [ip, minutes * 60] })
       )
     }
   }
