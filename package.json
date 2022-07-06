@@ -53,7 +53,7 @@
     "browserify": "17.0.0",
     "jest": "28.1.2",
     "jest-html-reporters": "3.0.9",
-    "jest-puppeteer": "6.1.0",
+    "jest-puppeteer": "6.1.1",
     "loadtest": "5.2.0",
     "merge": "2.1.1",
     "puppeteer": "14.1.2",
