@@ -27,10 +27,6 @@ PoW Shield aims to provide the following services bundled in a single webapp / d
 - ratelimiting and ip blacklisting
 - web application firewall
 
-## Stargazers
-
-[![Stargazers repo roster for PoW Shield](https://reporoster.com/stars/ruisiang/pow-shield)](https://github.com/ruisiang/pow-shield/stargazers)
-
 [Story on Medium](https://ruisiang.medium.com/pow-shield-application-layer-proof-of-work-ddos-filter-4fed32465509 'PoW Shield: Application Layer Proof of Work DDoS Filter')
 
 [Featured on Pentester Academy TV](https://youtu.be/zeNKUDR7_Jc 'The Tool Box | PoW Shield')
