@@ -9,20 +9,20 @@ html
     script(src='/javascripts/bundle.min.js')
   body
     .container
-      h1 PoW Shield
+      img(src='/logo.png' width='300px')
       p.rayid Ray ID: #{prefix}-#{difficulty}
       table
         tr.calculating
-          td Calculating Nonce 
+          td.w-full Calculating Nonce 
           td.w30.blink ...
         tr.submitting
-          td Submitting Result
+          td.w-full Submitting Result
           td.blink ...
         tr.success
-          td Redirecting
+          td.w-full Redirecting
           td.blink ...
         tr.failed
-          td Failed, Retrying
+          td.w-full Failed, Retrying
           td.blink ...
     script(src='/javascripts/main.min.js')
     script.
