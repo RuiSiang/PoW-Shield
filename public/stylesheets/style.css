@@ -1,5 +1,5 @@
 body {
-  font-family: 'Courier New', Courier, monospace;
+  font-family: Helvetica, Arial, sans-serif;
 }
 
 a {
@@ -9,32 +9,41 @@ a {
 /* divs */
 .container {
   height: 100vh;
-  width: fit-content;
+  width: 300px;
   text-align: center;
   text-align: -moz-center;
   justify-content: center;
   margin: 0 auto;
   padding-top: 30vh;
   transition: all 0.5s;
+  position: relative;
 }
-h1{
-  margin-bottom:0px;
+h1 {
+  margin-bottom: 0px;
 }
-.rayid{
-  margin-top:0px;
-  font-size:80%;
+.rayid {
+  margin-top: 0px;
+  font-size: 80%;
 }
 .submitting {
-  display:none;
+  display: none;
 }
 .success {
-  display:none;
+  display: none;
 }
 .failed {
-  display:none;
+  display: none;
 }
-.w30{
-  width:30px;
+table{
+  padding-left:20px;
+  padding-right:20px;
+}
+.w-full {
+  text-align:left;
+  width: 100%;
+}
+.w30 {
+  width: 30px;
 }
 .blink {
   animation: blinker 1s linear infinite;
