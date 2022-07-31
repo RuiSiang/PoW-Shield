@@ -26,7 +26,7 @@
     "koa-logger": "3.2.1",
     "koa-redis": "4.0.1",
     "koa-router": "12.0.0",
-    "koa-session-minimal": "4.0.2",
+    "koa-session-minimal": "4.0.3",
     "koa-static": "5.0.0",
     "koa-views": "8.0.0",
     "koa2-connect": "1.0.2",
