@@ -35,4 +35,4 @@ services:
   #####################################
   webapp:
     container_name: webapp
-    image: rancher/hello-world
+    image: ruisiang/trapbox
