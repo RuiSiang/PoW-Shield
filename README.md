@@ -51,6 +51,8 @@ Supported via [PoW Phalanx](https://github.com/ruisiang/PoW-Phalanx) controller:
 - Dynamic difficulty control
 - Dashboard
 
+Alternate implementation in Go [PoW-Shield-Go](https://github.com/RuiSiang/Pow-Shield-Go) (WIP) for stress testing purposes and future optimized production version.
+
 ## How it Works
 
 So basically, PoW Shield works as a proxy in front of the actual web app/service. It conducts verification via proof-of-work and only proxies authorized traffic through to the actual server. The proxy is easily installable, and is capable of protecting low security applications with a WAF.
