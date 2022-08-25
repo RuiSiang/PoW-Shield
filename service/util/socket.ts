@@ -44,6 +44,14 @@ export default class Client {
             case 'shld_set_config':
               config[obj.arguments[0]] = obj.arguments[1]
               break
+            case 'shld_fetch_settings':
+              this.send(
+                JSON.stringify({
+                  method: 'phlx_update_settings',
+                  arguments: [config],
+                })
+              )
+              break
             case 'shld_fetch_stats':
               this.send(
                 JSON.stringify({
