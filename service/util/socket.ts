@@ -45,14 +45,18 @@ export default class Client {
               config[obj.arguments[0]] = obj.arguments[1]
               break
             case 'shld_fetch_settings':
+              // skipcq: JS-0002
+              console.log('Broadcasting current settings')
               this.send(
                 JSON.stringify({
                   method: 'phlx_update_settings',
-                  arguments: [config],
+                  arguments: [JSON.stringify(config)],
                 })
               )
               break
             case 'shld_fetch_stats':
+              // skipcq: JS-0002
+              console.log('Broadcasting current stats')
               this.send(
                 JSON.stringify({
                   method: 'phlx_update_stats',
