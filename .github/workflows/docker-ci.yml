@@ -33,6 +33,7 @@ jobs:
       - name: Replace with lab specs
         run: |
           sed -i 's/1500/0/g' public/javascripts/main.min.js
+          sed -i 's/3e3/0/g' public/javascripts/main.min.js
           sed -i 's/3000/0/g' public/javascripts/main.min.js
           sed -i 's/500/0/g' public/javascripts/main.min.js
       - name: Build and push
