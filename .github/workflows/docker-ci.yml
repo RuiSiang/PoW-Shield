@@ -32,10 +32,7 @@ jobs:
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/pow-shield:latest
       - name: Replace with lab specs
         run: |
-          sed -i 's/1500/0/g' public/javascripts/main.min.js
-          sed -i 's/3e3/0/g' public/javascripts/main.min.js
-          sed -i 's/3000/0/g' public/javascripts/main.min.js
-          sed -i 's/500/0/g' public/javascripts/main.min.js
+          mv -f public/javascripts/main.lab.js public/javascripts/main.min.js
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
