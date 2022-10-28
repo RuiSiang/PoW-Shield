@@ -44,7 +44,7 @@
     "@types/ioredis": "4.28.10",
     "@types/jest": "28.1.8",
     "@types/koa": "2.13.5",
-    "@types/koa-bodyparser": "4.3.7",
+    "@types/koa-bodyparser": "4.3.9",
     "@types/koa-json": "2.0.20",
     "@types/koa-logger": "3.1.2",
     "@types/koa-router": "7.4.4",
