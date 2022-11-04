@@ -27,9 +27,11 @@ PoW Shield aims to provide the following services bundled in a single webapp / d
 - ratelimiting and ip blacklisting
 - web application firewall
 
-[Story on Medium](https://ruisiang.medium.com/pow-shield-application-layer-proof-of-work-ddos-filter-4fed32465509 'PoW Shield: Application Layer Proof of Work DDoS Filter')
+(New) [Article on LinkedIn](https://www.linkedin.com/feed/update/urn:li:ugcPost:6994133790017163264?updateEntityUrn=urn%3Ali%3Afs_updateV2%3A%28urn%3Ali%3AugcPost%3A6994133790017163264%2CFEED_DETAIL%2CEMPTY%2CDEFAULT%2Cfalse%29)
 
 [Featured on Pentester Academy TV](https://youtu.be/zeNKUDR7_Jc 'The Tool Box | PoW Shield')
+
+[Story on Medium](https://ruisiang.medium.com/pow-shield-application-layer-proof-of-work-ddos-filter-4fed32465509 'PoW Shield: Application Layer Proof of Work DDoS Filter')
 
 ## Features
 
