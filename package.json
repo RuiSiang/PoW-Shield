@@ -45,7 +45,7 @@
     "@types/jest": "28.1.8",
     "@types/koa": "2.13.8",
     "@types/koa-bodyparser": "4.3.9",
-    "@types/koa-json": "2.0.20",
+    "@types/koa-json": "2.0.21",
     "@types/koa-logger": "3.1.2",
     "@types/koa-router": "7.4.4",
     "@types/koa-session-minimal": "3.0.8",
