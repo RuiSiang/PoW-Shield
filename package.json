@@ -48,7 +48,7 @@
     "@types/koa-json": "2.0.22",
     "@types/koa-logger": "3.1.4",
     "@types/koa-router": "7.4.6",
-    "@types/koa-session-minimal": "3.0.9",
+    "@types/koa-session-minimal": "3.0.10",
     "@types/koa-views": "2.0.4",
     "@types/randomstring": "1.1.10",
     "browserify": "17.0.0",
