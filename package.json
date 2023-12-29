@@ -21,7 +21,7 @@
     "https": "1.0.0",
     "ioredis": "4.28.5",
     "ioredis-mock": "7.5.1",
-    "koa": "2.14.2",
+    "koa": "2.15.0",
     "koa-bodyparser": "4.3.0",
     "koa-json": "2.0.2",
     "koa-logger": "3.2.1",
