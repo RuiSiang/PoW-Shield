@@ -17,7 +17,7 @@
     "cron": "3.1.7",
     "debug": "4.3.7",
     "dotenv": "16.4.5",
-    "http-proxy-middleware": "2.0.7",
+    "http-proxy-middleware": "3.0.3",
     "https": "1.0.0",
     "ioredis": "4.28.5",
     "ioredis-mock": "7.5.1",
