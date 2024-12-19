@@ -57,7 +57,7 @@
     "jest-puppeteer": "6.2.0",
     "loadtest": "8.1.0",
     "merge": "2.1.1",
-    "puppeteer": "14.1.2",
+    "puppeteer": "23.11.1",
     "ts-jest": "28.0.8",
     "typescript": "5.7.2",
     "uglify-js": "3.19.3",
