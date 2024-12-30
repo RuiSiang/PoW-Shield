@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "create-hash": "1.2.0",
-    "cron": "3.3.0",
+    "cron": "3.3.2",
     "debug": "4.4.0",
     "dotenv": "16.4.7",
     "http-proxy-middleware": "2.0.7",
